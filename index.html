@@ -259,159 +259,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/React.js的context，高阶组件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CoalYa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="I'm CoalYa">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/12/React.js的context，高阶组件/" itemprop="url">React.js的context，高阶组件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T04:15:54-08:00">
-                2017-11-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h3><hr>
-<p>高阶组件就是一个<strong>函数</strong>，传给它一个组件，它返回一个新的组件，这个新的组件会使用传入的组件作为子组件。把组件内相同的逻辑，抽离出来，放到高阶组件中进行复用，高阶组件内部的包装组件和被包装组件之间通过<code>props</code>传递数据。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React , &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> (WrapperComponent, name) =&gt; &#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">NewComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">        <span class="keyword">constructor</span>() &#123;</div><div class="line">            <span class="keyword">super</span>()</div><div class="line">            <span class="keyword">this</span>.state = &#123;</div><div class="line">                data: <span class="literal">null</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        componentWillMount() &#123;</div><div class="line">            <span class="keyword">let</span> data = localStorage.getItem(name);</div><div class="line">            <span class="keyword">this</span>.setState(&#123; data &#125;)</div><div class="line">        &#125;</div><div class="line">        render() &#123;</div><div class="line">            <span class="keyword">return</span> &lt;WrapperComponent data=&#123;this.state.data&#125;/&gt;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return NewComponent</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="高阶组件的灵活性"><a href="#高阶组件的灵活性" class="headerlink" title="高阶组件的灵活性"></a>高阶组件的灵活性</h4><hr>
-<p>代码复用的方法、形式有很多种，可以用类继承来做到代码复用，也可以分离模块的方式。高阶组件其实就是设计模式中的装饰者模式。它通过组合的方式达到很高的灵活度。<br>假设现在需求变成通过Ajax加载数据而不是从LocalStorage加载数据，只需要新建一个<code>withAjaxLoadData</code>，修改<code>componentWillMount</code>中的逻辑即可</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">componentWillMount () &#123;</div><div class="line">    ajax.get(<span class="string">'/data/'</span> + name, (data) =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123; data &#125;)</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="context"><a href="#context" class="headerlink" title="context"></a>context</h3><hr>
-<p>React.js中，某个组件往自己的<code>context</code>里面放了某些状态，这个组件之下的所有子组件都可以直接访问这个状态，而不需要通过中间组件的传递。一个组件的<code>context</code>只有子组件能够访问，它的父组件是不能访问的。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> childContextTypes = &#123;</div><div class="line">    themeColor: PropTypes.string,</div><div class="line">    num: PropTypes.number</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">constructor</span>() &#123;</div><div class="line">    <span class="keyword">super</span>()</div><div class="line">    <span class="keyword">this</span>.state = &#123;</div><div class="line">      themeColor: <span class="string">'red'</span>,</div><div class="line">      num: <span class="string">'helloworld'</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  getChildContext() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      themeColor: <span class="keyword">this</span>.state.themeColor,</div><div class="line">      num: <span class="number">123</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div className=<span class="string">"App"</span>&gt;</div><div class="line">        &lt;Head /&gt;</div><div class="line">        &lt;Main /&gt;</div><div class="line">        &lt;Footer /&gt;</div><div class="line">      &lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">    );</span></div><div class="line"><span class="regexp">  &#125;</span></div><div class="line"><span class="regexp">&#125;</span></div></pre></td></tr></table></figure>
-<p><code>getChildContext</code>方法是用来设置<code>context</code>，返回的对象就是<code>context</code>，所有的子组件都是可以访问到这个对象。<code>childContextTypes</code>是用来验证<code>getChildContext</code>返回的对象，<strong>必须要写</strong>。因为<code>context</code>是一个危险的特性，React.js团队想把危险的东西搞得复杂一点，提高使用门槛。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Footer</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> contextTypes = &#123;</div><div class="line">        <span class="comment">// num: PropTypes.number,</span></div><div class="line">        themeColor: PropTypes.string</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            &lt;div style=&#123;&#123;<span class="attr">color</span>: <span class="keyword">this</span>.context.themeColor&#125;&#125;&gt;这是底部了&lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">        )</span></div><div class="line"><span class="regexp">    &#125;</span></div><div class="line"><span class="regexp">&#125;</span></div></pre></td></tr></table></figure>
-<p>子组件想要获取<code>context</code>里面的内容，就<strong>必须写</strong><code>contextTypes</code>来声明和验证你需要获取的状态的类型，否则无法获取<code>context</code>里面的状态。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/Canvas入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -694,7 +541,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -705,7 +552,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -716,7 +563,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
