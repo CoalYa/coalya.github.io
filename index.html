@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="CoalYa, Notes" />
 
 
 
@@ -166,7 +166,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">没事儿吹吹水</p>
+        <h1 class="site-subtitle" itemprop="description">有态度很难，就做点记录吧。。。</h1>
       
   </div>
 
@@ -268,6 +268,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/16/《深入理解ES6》之块级作用域绑定/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CoalYa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CoalYa's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/16/《深入理解ES6》之块级作用域绑定/" itemprop="url">《深入理解ES6》之块级作用域绑定</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-16T18:16:01-08:00">
+                2017-12-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="var声明及变量提升（Hoisting）机制"><a href="#var声明及变量提升（Hoisting）机制" class="headerlink" title="var声明及变量提升（Hoisting）机制"></a>var声明及变量提升（Hoisting）机制</h3><p>在函数作用域或全局作用域钟通过关键字<code>var</code>声明的变量，都会被当成在当前作用域顶部声明的变量，这就是我们常说的提升（Hoisting）机制<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">condition</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(condition)&#123;</div><div class="line">        <span class="keyword">var</span> value = <span class="string">'blue'</span>;</div><div class="line">        <span class="keyword">return</span> value;</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">//此处可以可访问变量value，其值为undefined</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//此处可以可访问变量value，其值为undefined    </span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在预编译阶段，JavaScript引擎会将上面的<code>getValue</code>函数修改成下面这样<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">condition</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> value;</div><div class="line">    <span class="keyword">if</span>(condition)&#123;</div><div class="line">        value = <span class="string">'blue'</span>;</div><div class="line">        <span class="keyword">return</span> value;</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>变量<code>value</code>的声明提升到函数顶部，初始化操作依然保留在原处执行，这就意味着在<code>else</code>语句中也可以访问到该变量，<br>且由于此时变量尚未初始化，所以其值为<code>undefined</code></p>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>块级声明用于声明在指定块的作用域之外无法访问的变量，块级作用域存在于：</p>
+<ul>
+<li>函数内部</li>
+<li>块中（{}内部）</li>
+</ul>
+<h4 id="let-声明"><a href="#let-声明" class="headerlink" title="let 声明"></a>let 声明</h4><p><code>let</code>声明的用法与<code>var</code>相同，用<code>let</code>声明的变量作用域限制在当前代码块中。由于<code>let</code>声明不会被提升，所以通常<br>将<code>let</code>声明语句放在封闭代码块的顶部，以便整个代码块都可以访问。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">condition</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(condition)&#123;</div><div class="line">        <span class="keyword">let</span> value = <span class="string">'blue'</span>;</div><div class="line">        <span class="keyword">return</span> value;</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">//变量value，此处不存在</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//变量value，此处不存在</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>变量<code>value</code>该用<code>let</code>声明后，不再提升至函数顶部，<code>if</code>语句执行完后，<code>value</code>立刻被销毁。如果<code>condition</code>为<br><code>false</code>，就永远不会声明并初始化<code>value</code></p>
+<h4 id="禁止重复声明"><a href="#禁止重复声明" class="headerlink" title="禁止重复声明"></a>禁止重复声明</h4><p>如果作用域中已经存在某个标识符，此时再使用<code>let</code>关键字声明它就会抛出错误<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> count = <span class="number">30</span>;</div><div class="line"></div><div class="line"><span class="comment">//抛出错误</span></div><div class="line"><span class="keyword">let</span> count = <span class="number">40</span>;</div></pre></td></tr></table></figure></p>
+<p>变量<code>count</code>被声明了两次，所以在<code>let</code>声明处会抛出错误。但如果当前作用域内嵌另一个作用域，便可以在内嵌作用域<br>中用<code>let</code>声明同名变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> count = <span class="number">30</span>;</div><div class="line"><span class="keyword">if</span>(condition) &#123;</div><div class="line">    <span class="comment">//不会抛出错误</span></div><div class="line">    <span class="keyword">let</span> count = <span class="number">40</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="const声明"><a href="#const声明" class="headerlink" title="const声明"></a>const声明</h4><p>关键字<code>const</code>用来声明一个常量，其值一旦设定后就不可更改。所以每个通过<code>const</code>声明的常量必须进行初始化。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> maxItems = <span class="number">30</span>;</div><div class="line"></div><div class="line"><span class="comment">//语法错误：常量未初始化</span></div><div class="line"><span class="keyword">const</span> name;</div></pre></td></tr></table></figure></p>
+<h4 id="const与let"><a href="#const与let" class="headerlink" title="const与let"></a>const与let</h4><p><code>const</code>与<code>let</code>声明的都是块级标识符，所以也只在当前代码块内有效，也不会被提升至作用域顶部，在同一作用域中<br>也不能重复声明</p>
+<h4 id="用const声明对象"><a href="#用const声明对象" class="headerlink" title="用const声明对象"></a>用const声明对象</h4><p><code>const</code>声明的变量不得改变值，对于引用类型数据，变量指向的内存地址，保存的是一个指针。<code>const</code>只能保证这个指针<br>是固定的，指针指向的数据结构是可变的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> person = &#123;</div><div class="line">    name: <span class="string">'Nico'</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//可以修改对象属性的值</span></div><div class="line">Nico.name = <span class="string">'Greg'</span>;</div><div class="line"></div><div class="line"><span class="comment">//抛出语法错误</span></div><div class="line">person = &#123;</div><div class="line">    name: <span class="string">'Greg'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="暂时死区（Temporal-Dead-Zone）"><a href="#暂时死区（Temporal-Dead-Zone）" class="headerlink" title="暂时死区（Temporal Dead Zone）"></a>暂时死区（Temporal Dead Zone）</h4><p><code>let</code>和<code>const</code>声明的变量不会被提升到作用域顶部，如果在声明之前访问这些变量，即使相对安全的<code>typeof</code>操作符<br>也会触发引用错误<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(condition) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> value); <span class="comment">//引用错误</span></div><div class="line">    <span class="keyword">let</span> value = <span class="string">'blue'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>由于<code>console.log(typeof value)</code>语句会抛出错误，因此用<code>let</code>定义并初始化变量<code>value</code>的语句不会执行，<br>此时<code>value</code>位于临时死区或TDZ中。</p>
+<p>JavaScript引擎在扫描代码发现变量声明时，要么将它们提升至作用域顶部（<code>var</code>声明），要么将声明放到TDZ中（<code>let</code>和<code>const</code>）。<br>访问TDZ中的变量会出发运行时错误。只有执行过变量声明语句后，变量才会从TDZ中移出，然后方可正常访问。</p>
+<h3 id="循环中的块作用域绑定"><a href="#循环中的块作用域绑定" class="headerlink" title="循环中的块作用域绑定"></a>循环中的块作用域绑定</h3><h4 id="循环中的函数"><a href="#循环中的函数" class="headerlink" title="循环中的函数"></a>循环中的函数</h4><p><code>var</code>声明在循环中创建函数变得异常困难，因为变量到了循环之外也能访问<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> funcs = [];</div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</div><div class="line">    funcs.push(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(i)</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">funcs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">    func(); <span class="comment">//输出10次数字10</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>这是因为循环里的每次迭代同时共享着变量<code>i</code>，循环内部创建的函数全都保留了对相同变量的引用。循环结束时变量<br><code>i</code>的值为10，所以每次调用<code>console.log(i)</code>都会输出数字10</p>
+<p>为了解决这个问题，可以使用立即调用函数表达式（IIFE），以强制生成计数器变量的副本。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> funcs = [];</div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</div><div class="line">    funcs.push((<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(value)</div><div class="line">            &#125;</div><div class="line">        &#125;(i)))</div><div class="line">&#125;</div><div class="line"></div><div class="line">funcs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">    func(); <span class="comment">//0,1,...,9</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>在循环内部，IIFE表达式为接受的每一个变量<code>i</code>都创建了一个副本并存储为变量<code>value</code>。这个变量的值就是相应迭代创建<br>的函数所使用的值，因此调用每个函数都会像0到9循环一样得到期望的值。</p>
+<h4 id="循环中的let声明"><a href="#循环中的let声明" class="headerlink" title="循环中的let声明"></a>循环中的let声明</h4><p>用<code>let</code>来声明上述示例，那么每次迭代循环都会创建一个新变量，并以之前迭代中同名变量的值将其初始化<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> funcs = [];</div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</div><div class="line">    funcs.push(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(i)</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">funcs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">    func(); <span class="comment">//0,1,...,9</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>对于<code>for-in</code>循环和<code>for-of</code>循环，表现的行为和<code>for</code>循环保持一致。</p>
+<h4 id="循环中的const声明"><a href="#循环中的const声明" class="headerlink" title="循环中的const声明"></a>循环中的const声明</h4><p>对于普通的<code>for</code>循环，可以在初始化变量时使用<code>const</code>，但是更改这个变量的值就会抛出错误<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> funcs = [];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">const</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</div><div class="line">    funcs.push(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(i)</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在<code>for-in</code>或<code>for-of</code>循环中使用<code>const</code>时的行为与使用<code>let</code>一致<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> funcs = [],</div><div class="line">    obj = &#123;</div><div class="line">        a: <span class="literal">true</span>,</div><div class="line">        b: <span class="literal">false</span>,</div><div class="line">        c: <span class="literal">true</span></div><div class="line">    &#125;;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">const</span> key <span class="keyword">in</span> obj)&#123;</div><div class="line">    funcs.push(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(key)</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">funcs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">func</span>)</span>&#123;</div><div class="line">    func()</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h3 id="全局块作用域绑定"><a href="#全局块作用域绑定" class="headerlink" title="全局块作用域绑定"></a>全局块作用域绑定</h3><p><code>let</code>和<code>const</code>与<code>var</code>的另外一个区别是它们在全局作用域的行为。当<code>var</code>被用于全局作用域时，它会创建一个新的全局<br>变量作为全局对象的属性。这意味着可能无意中覆盖了一个已经存在的全局变量。</p>
+<p>而在全局作用域使用<code>let</code>或<code>const</code>，不会覆盖全局变量，只能遮蔽它。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//浏览器中</span></div><div class="line"><span class="keyword">var</span> <span class="built_in">RegExp</span> = <span class="string">'hello'</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>,<span class="built_in">window</span>.RegExp);  <span class="comment">//'hello' 'hello'</span></div><div class="line"></div><div class="line"><span class="comment">//浏览器中</span></div><div class="line"><span class="keyword">let</span> <span class="built_in">RegExp</span> = <span class="string">'hello'</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>,<span class="built_in">window</span>.RegExp); <span class="comment">// 'hello' function RegExt()&#123; [native code] &#125;</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/03/Context/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -285,9 +455,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/03/Context/" itemprop="url">Context</a></h1>
+                <a class="post-title-link" href="/2017/12/03/Context/" itemprop="url">Context</a></h2>
         
 
         <div class="post-meta">
@@ -446,9 +616,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/05/Canvas入门/" itemprop="url">Canvas入门</a></h1>
+                <a class="post-title-link" href="/2017/11/05/Canvas入门/" itemprop="url">Canvas入门</a></h2>
         
 
         <div class="post-meta">
@@ -711,7 +881,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -722,7 +892,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -733,7 +903,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
