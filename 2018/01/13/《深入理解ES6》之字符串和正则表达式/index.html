@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="字符串和正则表达式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="18年的第一篇，回头看了看去年写的总结以及目标，完成了一小半，今年要更加努力才行。17年总体来说差强人意，代码写的依旧烂，当然也没留下太多遗憾。加入了新的公司，结识了一些简简单单的人。昨晚老爸问，有女朋友了吗？为什么没有？哎呀，刀刀暴击，不给活路。顿时思绪万千，额……失眠了。或许还没有成为理想中的自己吧，又或许其他。有些人，想着想着就远了，有些梦，做着做着就醒了。定几个小目标吧，1. 写">
+<meta name="keywords" content="字符串和正则表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《深入理解ES6》之字符串和正则表达式">
+<meta property="og:url" content="http://yoursite.com/2018/01/13/《深入理解ES6》之字符串和正则表达式/index.html">
+<meta property="og:site_name" content="CoalYa&#39;s Notes">
+<meta property="og:description" content="18年的第一篇，回头看了看去年写的总结以及目标，完成了一小半，今年要更加努力才行。17年总体来说差强人意，代码写的依旧烂，当然也没留下太多遗憾。加入了新的公司，结识了一些简简单单的人。昨晚老爸问，有女朋友了吗？为什么没有？哎呀，刀刀暴击，不给活路。顿时思绪万千，额……失眠了。或许还没有成为理想中的自己吧，又或许其他。有些人，想着想着就远了，有些梦，做着做着就醒了。定几个小目标吧，1. 写">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-13T10:57:59.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《深入理解ES6》之字符串和正则表达式">
+<meta name="twitter:description" content="18年的第一篇，回头看了看去年写的总结以及目标，完成了一小半，今年要更加努力才行。17年总体来说差强人意，代码写的依旧烂，当然也没留下太多遗憾。加入了新的公司，结识了一些简简单单的人。昨晚老爸问，有女朋友了吗？为什么没有？哎呀，刀刀暴击，不给活路。顿时思绪万千，额……失眠了。或许还没有成为理想中的自己吧，又或许其他。有些人，想着想着就远了，有些梦，做着做着就醒了。定几个小目标吧，1. 写">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/13/《深入理解ES6》之字符串和正则表达式/"/>
+
+
+
+
+
+  <title>《深入理解ES6》之字符串和正则表达式 | CoalYa's Notes</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110561175-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CoalYa's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">有态度很难，就做点记录吧。。。</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/13/《深入理解ES6》之字符串和正则表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CoalYa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CoalYa's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">《深入理解ES6》之字符串和正则表达式</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-13T02:47:35-08:00">
+                2018-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>18年的第一篇，回头看了看去年写的总结以及目标，完成了一小半，今年要更加努力才行。17年总体来说差强人意，代码写的依旧烂，当然也没留下太多遗憾。加入了新的公司，结识了一些简简单单的人。昨晚老爸问，有女朋友了吗？为什么没有？哎呀，刀刀暴击，不给活路。顿时思绪万千，额……失眠了。或许还没有成为理想中的自己吧，又或许其他。有些人，想着想着就远了，有些梦，做着做着就醒了。定几个小目标吧，1. 写好代码。毕竟这是立身之本。2. 学英语。努力赚钱，出国看看，语言还是很重要的。3. 学吉他。几年没弹过了，不忘初心嘛。4. 健身。报个健身房，撕裂吧腹肌胸肌肱二头肌。5. 考个驾照？</p>
+</blockquote>
+<p>ES6之前，JavaScript字符串是基于16位字符编码(UTF-16)进行构建。每16位序列是一个编码单元，代表一个字符。<code>length</code>、<code>charAt()</code>等字符串属性和方法都是基于这种编码单元构造的。</p>
+<h3 id="UTF-16码位"><a href="#UTF-16码位" class="headerlink" title="UTF-16码位"></a>UTF-16码位</h3><p>Unicode为每一个字符提供了唯一的标识符，又称为码位，它是从0开始的数值。而表示字符的这些数值或者码位，称之为字符编码。</p>
+<p>在UTF-16中，前2^16个码位均以16位的编码单元表示，这个范围称作<strong>基本多文种平面</strong>（BMP）。超出这个范围的码位则要归属于某个辅助平面，因为用16位已经无法表示。为此，UTF-16引入了<em>代理对</em>，规定用两个16位编码单元表示一个码位。</p>
+<p>所以，字符串有两种，一种是由一个编码单元16位表示的BMP字符，另一种是有两个编码单元32位表示的<strong>辅助平面字符</strong></p>
+<p>在ES5中，所有字符串的操作都是基于16位编码单元的BMP字符，如果直接用于32位编码单元的辅助平面字符，得到的结果可能与预期不符。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> text = <span class="string">"𠮷"</span>; <span class="comment">//不是‘吉’</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(text.length);      <span class="comment">//2</span></div><div class="line"><span class="built_in">console</span>.log(<span class="regexp">/^.$/</span>.test(text));  <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(text.charAt(<span class="number">0</span>))     <span class="comment">//""</span></div><div class="line"><span class="built_in">console</span>.log(text.charAt(<span class="number">1</span>))        <span class="comment">//""</span></div><div class="line"><span class="built_in">console</span>.log(text.charCodeAt(<span class="number">0</span>))     <span class="comment">//55362</span></div><div class="line"><span class="built_in">console</span>.log(text.charCodeAt(<span class="number">1</span>))     <span class="comment">//57271</span></div></pre></td></tr></table></figure></p>
+<p><em>𠮷</em>是辅助平面字符，ES5中的字符串操作方法将其视为两个16位字符。</p>
+<ul>
+<li><code>text</code>的长度是1，但<code>length</code>属性值为2</li>
+<li><code>text</code>被判定为两个字符，因此匹配单一字符的正则失效</li>
+<li>前后两个16位编码都不表示任何可打印字符，所以<code>charAt()</code>方法不会返回合法的字符串</li>
+<li><code>charCodeAt()</code>方法同样不能正确识别字符，他会返回每个16位编码单元对应的数值</li>
+</ul>
+<h3 id="ES6新增的字符串操作方法"><a href="#ES6新增的字符串操作方法" class="headerlink" title="ES6新增的字符串操作方法"></a>ES6新增的字符串操作方法</h3><p>ES6新增的字符串方法，完全支持UTF-16（辅助平面字符）</p>
+<h4 id="codePointAt-方法"><a href="#codePointAt-方法" class="headerlink" title="codePointAt()方法"></a>codePointAt()方法</h4><p>该方法接受<em>编码单元</em>（非字符位置）的位置做为参数，返回字符串中给定位置对应的码位，即一个整数值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> text = <span class="string">"𠮷a"</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(text.charCodeAt(<span class="number">0</span>));    <span class="comment">//55362</span></div><div class="line"><span class="built_in">console</span>.log(text.charCodeAt(<span class="number">1</span>));    <span class="comment">//57271</span></div><div class="line"><span class="built_in">console</span>.log(text.charCodeAt(<span class="number">2</span>));    <span class="comment">//97</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(text.codePointAt(<span class="number">0</span>));   <span class="comment">//134071</span></div><div class="line"><span class="built_in">console</span>.log(text.codePointAt(<span class="number">1</span>));   <span class="comment">//57271</span></div><div class="line"><span class="built_in">console</span>.log(text.codePointAt(<span class="number">2</span>));   <span class="comment">//97</span></div></pre></td></tr></table></figure>
+<p>对于BMP字符集中的字符，<code>codePointAt</code>和<code>charCodeAt</code>方法返回的值是相同的。<code>text</code>中第一个字符属于辅助平面字符，包含2个编码单元，<code>length</code>值为3。<code>charCodeAt</code>返回的只是位置0处的第一个编码单元，<code>charPointAt</code>返回的是完整的码位，即使这个码位包含2个编码单元。</p>
+<p>检测字符占用的编码单元的数量，可以用<code>charPointAt</code>方法，返回值大于十六进制的上界值FFFF，则一定有两个编码单元来表示。（因为不足以表示所有字符，所以才用辅助平面字符来表示）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">is32Bit</span>(<span class="params">c</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> c.codePointAt(<span class="number">0</span>)&gt; <span class="number">0xFFFF</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(is32Bit(<span class="string">'𠮷'</span>));  <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(is32Bit(<span class="string">'a'</span>));  <span class="comment">//false</span></div></pre></td></tr></table></figure></p>
+<h4 id="String-fromCodePoint-方法"><a href="#String-fromCodePoint-方法" class="headerlink" title="String.fromCodePoint()方法"></a>String.fromCodePoint()方法</h4><p><code>String.fromCodePoint()</code>接收一个码位，返回一个字符<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.fromCodePoint(<span class="number">134071</span>));  <span class="comment">//𠮷</span></div></pre></td></tr></table></figure></p>
+<h4 id="normalize-方法"><a href="#normalize-方法" class="headerlink" title="normalize()方法"></a>normalize()方法</h4><p>Unicode中，对不同字符进行排序或比较操作，可能它们是等效的。有两种方式可以定义这种关系</p>
+<ul>
+<li>规范的等效，两个序列的码位一致</li>
+<li>兼容性，两个互相兼容的码位序列看起来不同，但是在特定的情况下可以被互相交换使用。</li>
+</ul>
+<p>比如Ǒ（\u01D1），O（\u004F）和ˇ（\u030C）组合，可以互相使用，但从严格意义上来讲，它们不是等效。ES6为字符串提供了一个<code>normalize</code>方法，它可以提供Unicode的标准化形式，该方法接收一个可选字符串参数。</p>
+<ul>
+<li>以标准等价方式分解，然后以标准等价方式重组（’NFC’），默认选项</li>
+<li>以标准等价方式分解（NFD）</li>
+<li>以兼容等价方式分解（’NFKC’）</li>
+<li>以兼容等价方式分解，然后易标准等价方式重组（’NFKD’）<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">'\u01D1'</span> === <span class="string">'\u004F\u030C'</span>);   <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'\u01D1'</span>.normalize() === <span class="string">'\u004F\u030C'</span>.normalize());   <span class="comment">//true</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在对比字符串之前，一定要先把它们标准化为同一格式。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> normalized = values.map(<span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> text.normalize()</div><div class="line">&#125;)</div><div class="line">normalized.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(a &lt; b)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a === b)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>将<code>values</code>数组中的所有字符都转换成同一种标准格式，因此该数组可以被正确排序</p>
+<blockquote>
+<p><code>sort</code>方法中的函数，返回值小于0，a在b前面。大于0，a在b后面。等于0，a，b相对位置不变。上面是升序</p>
+</blockquote>
+<h4 id="字符串中的子串识别"><a href="#字符串中的子串识别" class="headerlink" title="字符串中的子串识别"></a>字符串中的子串识别</h4><ul>
+<li><code>includes()</code>，字符串中检测到指定文本返回<code>true</code>，否则<code>false</code></li>
+<li><code>startsWith()</code>，字符串起始部分检测到指定文本返回<code>true</code>，否则<code>false</code></li>
+<li><code>endsWith()</code>，字符串结束部分检测到指定文本返回<code>true</code>，否则<code>false</code><br>以上方法，都接受两个参数，第一个参数指定要搜索的文本，第二个参数可选，指定开始搜索的位置的索引值。如果指定第二个参数，<code>includes</code>和<code>startWith</code>方法会从这个索引值的位置开始匹配。<code>endsWith</code>方法则从字符串长度减去这个索引值的位置开始匹配。<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> msg = <span class="string">'hello world!'</span></div><div class="line"><span class="built_in">console</span>.log(msg.startsWith(<span class="string">'hello'</span>));   <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(msg.endsWith(<span class="string">'!'</span>));     <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(msg.includes(<span class="string">'o'</span>));     <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(msg.startsWith(<span class="string">'o'</span>, <span class="number">4</span>));    <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(msg.endsWith(<span class="string">'o'</span>,<span class="number">8</span>))     <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(msg.includes(<span class="string">'o'</span>,<span class="number">8</span>));  <span class="comment">//false</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="repeat-方法"><a href="#repeat-方法" class="headerlink" title="repeat()方法"></a>repeat()方法</h4><p>重复字符串方法，接受一个<code>number</code>型参数，表示重复次数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">'hello'</span>.repeat(<span class="number">2</span>));     <span class="comment">//'hellohello'</span></div></pre></td></tr></table></figure></p>
+<h3 id="正则表达式变更"><a href="#正则表达式变更" class="headerlink" title="正则表达式变更"></a>正则表达式变更</h3><h4 id="u修饰符"><a href="#u修饰符" class="headerlink" title="u修饰符"></a>u修饰符</h4><p>正则表达式默认将字符串中的每一个字符按照16位编码单元处理，为了解决这个问题，ES6新增u修饰符。当一个正则表达式添加了u修饰符时，它就从编码单元操作模式切换为字符模式。这样正则表达式就不会把辅助平面字符（代理对）为两个字符。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> text = <span class="string">'𠮷'</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(text.length);   <span class="comment">//2</span></div><div class="line"><span class="built_in">console</span>.log(<span class="regexp">/^.$/</span>.test(text));      <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="regexp">/^.$/u</span>.test(text));     <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+<p>可以利用u修饰符，检测字符串的码位<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">codePointLength</span>(<span class="params">text</span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> result = text.match(<span class="regexp">/[\s\S]/gu</span>);</div><div class="line">    <span class="keyword">return</span> result? result.length: <span class="number">0</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(codePointLength(<span class="string">'abc'</span>));    <span class="comment">//3</span></div><div class="line"><span class="built_in">console</span>.log(codePointLength(<span class="string">'𠮷bc'</span>));   <span class="comment">//3</span></div></pre></td></tr></table></figure></p>
+<p>检测u修饰符支持<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasRegExpU</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">var</span> pattern = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'.'</span>, <span class="string">'u'</span>);</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    &#125; <span class="keyword">catch</span> (ex) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个函数使用了RegExp构造函数并传入一个修饰符u作为参数，老式浏览器支持这个语法，如果不支持u修饰符会抛出错误。这样可以避免发生语法错误。</p>
+<h4 id="y修饰符"><a href="#y修饰符" class="headerlink" title="y修饰符"></a>y修饰符</h4><p>y修饰符的正则表达式称为粘滞正则表达式，他会影响正则表达式搜索过程中的<code>sticky</code>属性，当它在字符串中开始字符匹配时，会通知从正则表达式的<code>lastIndex</code>属性开始进行。如果指定位置未能成功匹配，则停止继续匹配。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> text = <span class="string">'hello1 hello2 hello3'</span>,</div><div class="line">    pattern = <span class="regexp">/hello\d\s?/</span>,</div><div class="line">    result = pattern.exec(text),</div><div class="line">    globalPattern = <span class="regexp">/hello\d\s?/g</span>,</div><div class="line">    globalResult = globalPattern.exec(text),</div><div class="line">    stickyPattern = <span class="regexp">/hello\d\s?/y</span>,</div><div class="line">    stickyResult = stickyPattern.exec(text);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(result[<span class="number">0</span>]);     <span class="comment">//'hello1 '</span></div><div class="line"><span class="built_in">console</span>.log(globalResult[<span class="number">0</span>]);   <span class="comment">//'hello1 '</span></div><div class="line"><span class="built_in">console</span>.log(stickyResult[<span class="number">0</span>]);   <span class="comment">//'hello1 '</span></div><div class="line"></div><div class="line">pattern.lastIndex = <span class="number">1</span>;</div><div class="line">globalPattern.lastIndex = <span class="number">1</span>;</div><div class="line">stickyPattern.lastIndex = <span class="number">1</span>;</div><div class="line"></div><div class="line">result = pattern.exec(text);</div><div class="line">globalResult = globalPattern.exec(text);</div><div class="line">stickyResult = stickyPattern.exec(text);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(result[<span class="number">0</span>]);     <span class="comment">//'hello1 '</span></div><div class="line"><span class="built_in">console</span>.log(globalResult[<span class="number">0</span>]);   <span class="comment">//'hello2 '</span></div><div class="line"><span class="built_in">console</span>.log(stickyResult[<span class="number">0</span>]);   <span class="comment">//抛出错误</span></div></pre></td></tr></table></figure></p>
+<p>当<code>lastIndex</code>属性改成1时，此时正则表达式从字符串的第二个字符开始匹配。没有修饰符的表达式自动忽略，所以第二个表达式向后匹配到了’hello2 ‘，使用了y修饰符的粘滞正则表达式，由于从第二个字符开始匹配不到相应的字符串，就此终止。所以<code>stickyResult</code>为<code>null</code></p>
+<ul>
+<li>只有调用<code>exec()</code>和<code>test()</code>这些正则表达式对象的方法时才会涉及<code>lastIndex</code>属性，调用字符串方法如<code>match()</code>不会触发粘滞行为。</li>
+<li>对于粘滞正则表达式，如果使用<code>^</code>匹配字符串开端，只会从字符串的起始位置或者多行模式的首行进行匹配。如果此时<code>lastIndex</code>值不为0，则永远不会匹配到结果</li>
+</ul>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank" rel="external">资料1</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="external">资料2</a></p>
+</blockquote>
+<h4 id="正则表达式复制"><a href="#正则表达式复制" class="headerlink" title="正则表达式复制"></a>正则表达式复制</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/ab/i</span>,</div><div class="line">    reg2 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(reg1,<span class="string">'g'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(reg2.toString());   <span class="comment">//  /ab/g</span></div></pre></td></tr></table></figure>
+<p>在ES5环境中，<code>RegExp</code>构造函数，第一个参数为正则表达式时不可以使用第二个参数，ES6中修改了这个行为</p>
+<h4 id="flags属性"><a href="#flags属性" class="headerlink" title="flags属性"></a>flags属性</h4><p><code>flags</code>属性用来获取正则表达式的修饰符<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/ab/i</span>;</div><div class="line"><span class="built_in">console</span>.log(reg2.flags);    <span class="comment">//i</span></div></pre></td></tr></table></figure></p>
+<h3 id="模版字面量"><a href="#模版字面量" class="headerlink" title="模版字面量"></a>模版字面量</h3><p>ES6模版字面量语法支持创建领域专用语言(DSL)，它比ES5及早起版本中的解决方案更家安全。</p>
+<h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> message = <span class="string">`Hello world!`</span>;</div></pre></td></tr></table></figure>
+<p>模版字面量用反撇号（`）表示，如果在字符串中使用反撇号，需要用反斜杆（\）进行转义</p>
+<h4 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h4><p>在ES5中，可以利用一个语法bug，在一个新行的最前方添加反斜杆（\）可以承接上一行代码，来创造多行字符串<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message1 = <span class="string">'Multiline \</span></div><div class="line"><span class="string">string'</span></div><div class="line"><span class="keyword">var</span> message2 = <span class="string">'Multiline \n\</span></div><div class="line"><span class="string">string'</span></div><div class="line"><span class="built_in">console</span>.log(message1);  <span class="comment">//Multiline string</span></div><div class="line"><span class="built_in">console</span>.log(message2);  <span class="comment">//Multiline </span></div><div class="line">                        <span class="comment">//string</span></div></pre></td></tr></table></figure></p>
+<p>反斜杆在此处代表行的延续，而非真正代表新的一行，如果想要输入新的一行，需要手动加入换行符。</p>
+<p>ES6之前版本中，通常通过数组活着字符串拼接的方式创建多行字符串<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message1 = [<span class="string">'Multiline'</span>,<span class="string">'string'</span>].join(<span class="string">'\n'</span>);</div><div class="line"><span class="keyword">var</span> message2 = <span class="string">'Multiline \n'</span> + <span class="string">'string'</span></div></pre></td></tr></table></figure></p>
+<p>在ES6中的模版字面量，只需在代码中直接换行即可。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message = <span class="string">`Multiline</span></div><div class="line"><span class="string">string`</span></div><div class="line"><span class="built_in">console</span>.log(message);   <span class="comment">//Multiline </span></div><div class="line">                        <span class="comment">//string</span></div></pre></td></tr></table></figure></p>
+<p>在反撇号中的所有空白符都输入字符串中的一部分<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message = <span class="string">`Multiline</span></div><div class="line"><span class="string">    string`</span>         <span class="comment">//string前面有4个空格</span></div><div class="line"><span class="built_in">console</span>.log(message.length); <span class="comment">//20</span></div></pre></td></tr></table></figure></p>
+<p>第二行之前的所有空白符都是字符串本身的一部分</p>
+<h4 id="字符串占位符"><a href="#字符串占位符" class="headerlink" title="字符串占位符"></a>字符串占位符</h4><p>占位符由一个美元符和大括号<code>${}</code>组成，中间可以包含任意的<code>JavaScript</code>表达式。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> count = <span class="number">10</span>,</div><div class="line">    price = <span class="number">0.25</span>,</div><div class="line">    message = <span class="string">`<span class="subst">$&#123;count&#125;</span> items cost $<span class="subst">$&#123;(count * price).toFixed(<span class="number">2</span>)&#125;</span>.`</span>;</div><div class="line"><span class="built_in">console</span>.log(message);    <span class="comment">//10 items cost $2.50.</span></div></pre></td></tr></table></figure></p>
+<p>第一个美元符会原样输出，因为后面没有紧跟一个左括号</p>
+<p>模版字面量本身也是<code>JavaScript</code>表达式，所以可以在一个模版中嵌入另一个<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> name = <span class="string">'Nicholas'</span>,</div><div class="line">    message = <span class="string">`Hello, <span class="subst">$&#123;</span></span></div><div class="line"><span class="string"><span class="subst">        <span class="string">`my name is <span class="subst">$&#123;name&#125;</span>`</span></span></span></div><div class="line"><span class="string"><span class="subst">    &#125;</span>.`</span>;</div><div class="line"><span class="built_in">console</span>.log(message);   <span class="comment">//Hello, my name is Nicholas.</span></div></pre></td></tr></table></figure></p>
+<h3 id="模版标签"><a href="#模版标签" class="headerlink" title="模版标签"></a>模版标签</h3><p>在模版字面量第一个反撇号（`）前方标注的字符串（函数），就是标签。模版标签可以执行模版字面量上的转换，并返回最终的字符串值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> message = tag<span class="string">`hello world`</span></div></pre></td></tr></table></figure></p>
+<p>如示，应用于模版字面量的模版标签是<code>tag</code></p>
+<h4 id="定义标签"><a href="#定义标签" class="headerlink" title="定义标签"></a>定义标签</h4><p>标签是一个函数，调用时，第一个参数是一个数组，包含<code>JavaScript</code>解释过后的字面量字符串（模板字符串中那些没有变量替换的部分），之后的所有参数都是每一个占位符的解释值。</p>
+<p>标签函数通常使用不定参数特征来定义占位符来简化处理过程<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> count = <span class="number">10</span>,</div><div class="line">    price = <span class="number">0.25</span>,</div><div class="line">    message = tag<span class="string">`<span class="subst">$&#123;count&#125;</span> items cost $<span class="subst">$&#123;(count * price).toFixed(<span class="number">2</span>)&#125;</span>.`</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">tag</span>(<span class="params">literals, ...substitutions</span>)</span>&#123;</div><div class="line">    <span class="comment">// console.log(literals);   [ '', ' items cost $', '.' ]</span></div><div class="line">    <span class="comment">// console.log(substitutions); [ 10, '2.50' ]</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>示例中，<code>tag</code>函数，作为一个模版字面量标签，会接受3个参数。<code>literals</code>是一个数组，包含一下元素</p>
+<ul>
+<li>第一个占位符前的空字符串（’’）</li>
+<li>第一，二个占位符之间的字符串（’ items cost $’）</li>
+<li>第二个占位符后的字符串（’.’）</li>
+</ul>
+<p>第二个参数是变量<code>count</code>的解释值，传参为10，最后一个是<code>count * price).toFixed(2)</code>的解释值，传参为’2.50’</p>
+<p><code>literals</code>里第一个元素是空字符串，确保<code>literals[0]</code>是字符串始端，<code>substitutions</code>的数量始终比<code>literals</code>少一个，意味着<code>substitutions.length === literals.length-1</code>表达式始终为<code>true</code></p>
+<p>模版标签可以到字符转义被转换成等价字符前的原生字符串，如<code>String.raw()</code>标签<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> message1 = <span class="string">`Multiline\nstring`</span>,</div><div class="line">    message2 = <span class="built_in">String</span>.raw<span class="string">`Multiline\nstring`</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(message1);  <span class="comment">//Multiline</span></div><div class="line">                        <span class="comment">//string</span></div><div class="line"><span class="built_in">console</span>.log(message2);  <span class="comment">//'Multiline\\nstring'</span></div></pre></td></tr></table></figure></p>
+<p>变量<code>message1</code>中的<code>\n</code>解释为一个新行，变量<code>message2</code>获取的是<code>\n</code>的原生形式<code>\\n</code></p>
+<p>原生字符串信息同样也传入标签模版，标签函数第一个参数，它有一个额外的属性<code>raw</code>，是一个包含每一个字面量的原生等价信息的数组。如<code>literals[0]</code>对应的原生字符串为<code>literals.raw[0]</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/字符串和正则表达式/" rel="tag"># 字符串和正则表达式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/16/《深入理解ES6》之块级作用域绑定/" rel="next" title="《深入理解ES6》之块级作用域绑定">
+                <i class="fa fa-chevron-left"></i> 《深入理解ES6》之块级作用域绑定
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="CoalYa" />
+            
+              <p class="site-author-name" itemprop="name">CoalYa</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-16码位"><span class="nav-number">1.</span> <span class="nav-text">UTF-16码位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6新增的字符串操作方法"><span class="nav-number">2.</span> <span class="nav-text">ES6新增的字符串操作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#codePointAt-方法"><span class="nav-number">2.1.</span> <span class="nav-text">codePointAt()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String-fromCodePoint-方法"><span class="nav-number">2.2.</span> <span class="nav-text">String.fromCodePoint()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#normalize-方法"><span class="nav-number">2.3.</span> <span class="nav-text">normalize()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串中的子串识别"><span class="nav-number">2.4.</span> <span class="nav-text">字符串中的子串识别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#repeat-方法"><span class="nav-number">2.5.</span> <span class="nav-text">repeat()方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式变更"><span class="nav-number">3.</span> <span class="nav-text">正则表达式变更</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u修饰符"><span class="nav-number">3.1.</span> <span class="nav-text">u修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#y修饰符"><span class="nav-number">3.2.</span> <span class="nav-text">y修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正则表达式复制"><span class="nav-number">3.3.</span> <span class="nav-text">正则表达式复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flags属性"><span class="nav-number">3.4.</span> <span class="nav-text">flags属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模版字面量"><span class="nav-number">4.</span> <span class="nav-text">模版字面量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础语法"><span class="nav-number">4.1.</span> <span class="nav-text">基础语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多行字符串"><span class="nav-number">4.2.</span> <span class="nav-text">多行字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串占位符"><span class="nav-number">4.3.</span> <span class="nav-text">字符串占位符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模版标签"><span class="nav-number">5.</span> <span class="nav-text">模版标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义标签"><span class="nav-number">5.1.</span> <span class="nav-text">定义标签</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CoalYa</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
