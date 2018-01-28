@@ -14,6 +14,17 @@
 
 
 
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="https://lib.baomitu.com/pace/1.0.2/pace.min.js"></script>
+  <link href="https://lib.baomitu.com/pace/1.0.2/themes/black/pace-theme-center-atom.css" rel="stylesheet">
+
 
 
 
@@ -40,7 +51,9 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+    
+  
+  <link href="https://lib.baomitu.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -87,7 +100,7 @@
 <meta property="og:site_name" content="CoalYa&#39;s Notes">
 <meta property="og:description" content="18年的第一篇，回头看了看去年写的总结以及目标，完成了一小半，今年要更加努力才行。17年总体来说差强人意，代码写的依旧烂，当然也没留下太多遗憾。加入了新的公司，结识了一些简简单单的人。昨晚老爸问，有女朋友了吗？为什么没有？哎呀，刀刀暴击，不给活路。顿时思绪万千，额……失眠了。或许还没有成为理想中的自己吧，又或许其他。有些人，想着想着就远了，有些梦，做着做着就醒了。定几个小目标吧，1. 写">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-13T10:57:59.640Z">
+<meta property="og:updated_time" content="2018-01-28T09:18:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《深入理解ES6》之字符串和正则表达式">
 <meta name="twitter:description" content="18年的第一篇，回头看了看去年写的总结以及目标，完成了一小半，今年要更加努力才行。17年总体来说差强人意，代码写的依旧烂，当然也没留下太多遗憾。加入了新的公司，结识了一些简简单单的人。昨晚老爸问，有女朋友了吗？为什么没有？哎呀，刀刀暴击，不给活路。顿时思绪万千，额……失眠了。或许还没有成为理想中的自己吧，又或许其他。有些人，想着想着就远了，有些梦，做着做着就醒了。定几个小目标吧，1. 写">
@@ -331,11 +344,32 @@
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/《深入理解ES6》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解ES6》</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/13/《深入理解ES6》之字符串和正则表达式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/13/《深入理解ES6》之字符串和正则表达式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -418,8 +452,8 @@
 <li>对于粘滞正则表达式，如果使用<code>^</code>匹配字符串开端，只会从字符串的起始位置或者多行模式的首行进行匹配。如果此时<code>lastIndex</code>值不为0，则永远不会匹配到结果</li>
 </ul>
 <blockquote>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank" rel="external">资料1</a></p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="external">资料2</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions</a></p>
 </blockquote>
 <h4 id="正则表达式复制"><a href="#正则表达式复制" class="headerlink" title="正则表达式复制"></a>正则表达式复制</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/ab/i</span>,</div><div class="line">    reg2 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(reg1,<span class="string">'g'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(reg2.toString());   <span class="comment">//  /ab/g</span></div></pre></td></tr></table></figure>
 <p>在ES5环境中，<code>RegExp</code>构造函数，第一个参数为正则表达式时不可以使用第二个参数，ES6中修改了这个行为</p>
@@ -491,6 +525,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/01/28/《深入理解ES6》之函数/" rel="prev" title="《深入理解ES6》之函数">
+                《深入理解ES6》之函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -517,6 +555,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
 
   
 
@@ -570,7 +615,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -581,7 +626,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -592,7 +637,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -718,12 +763,12 @@
 
   
   
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/jquery/2.2.3/jquery.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/fastclick/1.0.6/fastclick.min.js"></script>
   
 
   
@@ -733,17 +778,17 @@
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/velocity/1.2.1/velocity.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/velocity/1.2.1/velocity.ui.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
   
 
 
@@ -805,6 +850,43 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'gangxiaoya',
+            repo: 'git@github.com:CoalYa/Gitment-comments.git',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '1b123c540f0c28ffd89029b4bbfa10004fe63c2e',
+            
+                client_id: '57bf651faef288c37f8e'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 

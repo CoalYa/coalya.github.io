@@ -14,6 +14,17 @@
 
 
 
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="https://lib.baomitu.com/pace/1.0.2/pace.min.js"></script>
+  <link href="https://lib.baomitu.com/pace/1.0.2/themes/black/pace-theme-center-atom.css" rel="stylesheet">
+
 
 
 
@@ -40,7 +51,9 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+    
+  
+  <link href="https://lib.baomitu.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -268,6 +281,248 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/28/《深入理解ES6》之函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CoalYa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CoalYa's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/28/《深入理解ES6》之函数/" itemprop="url">《深入理解ES6》之函数</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T00:46:42-08:00">
+                2018-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/《深入理解ES6》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解ES6》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>“一杯敬明天，一杯敬过往”、“一杯敬自由，一杯敬死亡”。逛了下歌手，《消愁》这首歌句句戳心。一首歌如果能带来一些思考，能想起一些画面，也许就是一首好歌吧。</p>
+</blockquote>
+<h3 id="函数形参的默认值"><a href="#函数形参的默认值" class="headerlink" title="函数形参的默认值"></a>函数形参的默认值</h3><p><code>JavaScript</code>函数语法规定，无论在函数定义中声明了多少形参，调用时可以传入任意数量的参数。可以在定义时，当已定义的形参无对应的传入参数时为其指定一个默认值。</p>
+<h4 id="在ES5中模拟默认参数"><a href="#在ES5中模拟默认参数" class="headerlink" title="在ES5中模拟默认参数"></a>在ES5中模拟默认参数</h4><p>ES5和早期版本中，可能通过如下方法模拟默认参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeRequest</span>(<span class="params">url, timeout, callback</span>)</span>&#123;</div><div class="line">    timeout = (<span class="keyword">typeof</span> timeout !== <span class="string">'undefined'</span>)? timeout: <span class="number">2000</span>;</div><div class="line">    callback = (<span class="keyword">typeof</span> callback !== <span class="string">'undefined'</span>)? callback: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="comment">//函数其余部分</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>示例中，<code>timeout</code>和<code>callback</code>为可选参数，如果没有传入相应的参数，会有一个默认值。对于函数命名参数，如果不显示传值，默认为<code>undefined</code>。在模拟默认参数时，最好不要这样写<code>timeout = timeout || 2000</code>，因为，如果想给<code>timeout</code>传入0，即使这个值合法，也会被视为<code>false</code>，最终<code>timeout</code>赋值为2000。</p>
+<h4 id="ES6中的默认参数"><a href="#ES6中的默认参数" class="headerlink" title="ES6中的默认参数"></a>ES6中的默认参数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeRequest</span>(<span class="params">url, timeout=<span class="number">2000</span>, callback=function(</span>) </span>&#123;&#125;)&#123;</div><div class="line">    <span class="comment">//函数其余部分</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ES6简化了为形参提供默认参数的过程，声明函数时，可以为任意参数指定默认值，在已指定默认值的参数后面，可以继续声明无默认值参数。只有不为参数传入值或者 <strong>传入值为<code>undefined</code></strong> 时，对应参数才会使用默认值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//不使用timeout默认值</span></div><div class="line">makeRequest(<span class="string">'/foo'</span>,<span class="literal">undefined</span>,<span class="function"><span class="keyword">function</span>(<span class="params">body</span>)</span>&#123;</div><div class="line">    doSomething(body)</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">//使用timeout默认值</span></div><div class="line">makeRequest(<span class="string">'/foo'</span>)</div><div class="line"></div><div class="line"><span class="comment">//使用timeout默认值</span></div><div class="line">makeRequest(<span class="string">'/foo'</span>, <span class="literal">null</span>, <span class="function"><span class="keyword">function</span>(<span class="params">body</span>)</span>&#123;</div><div class="line">    doSomething(body)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h4 id="默认参数值对arguments对象的影响"><a href="#默认参数值对arguments对象的影响" class="headerlink" title="默认参数值对arguments对象的影响"></a>默认参数值对arguments对象的影响</h4><p>在ES5非严格模式中，命名参数的变化会同步更新到<code>arguments</code>对象，严格模式中<code>arguments</code>对象不随命名参数变化而变化。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixArgs</span>(<span class="params">first, second</span>)</span>&#123;</div><div class="line">    <span class="comment">// 'use strict'</span></div><div class="line">    <span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);  <span class="comment">//true</span></div><div class="line">    <span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]); <span class="comment">//true</span></div><div class="line">    first = <span class="string">'c'</span>;</div><div class="line">    second = <span class="string">'d'</span>;</div><div class="line">    <span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">//true</span></div><div class="line">    <span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]); <span class="comment">//true</span></div><div class="line">&#125;</div><div class="line">mixArgs(<span class="string">'a'</span>, <span class="string">'b'</span>)；</div></pre></td></tr></table></figure></p>
+<p>当定义为严格模式时，输出为<code>true</code>，<code>true</code>，<code>false</code>，<code>false</code></p>
+<p>ES6中，函数使用了默认参数，无论是否显式定义了严格模式，<code>arguments</code>对象行为都与ES5中的严格模式保持一致。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixArgs</span>(<span class="params">first, second=<span class="string">'b'</span></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);  </div><div class="line">    <span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]);</div><div class="line">    first = <span class="string">'c'</span>;</div><div class="line">    second = <span class="string">'d'</span>;</div><div class="line">    <span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);</div><div class="line">    <span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]);</div><div class="line">&#125;</div><div class="line">mixArgs(<span class="string">'a'</span>)</div></pre></td></tr></table></figure></p>
+<p>以上输出为<code>true</code>，<code>false</code>，<code>false</code>，<code>false</code>，<code>first</code>和<code>second</code>并不会影响<code>arguments</code>对象，其中<code>arguments[1]===undefined</code></p>
+<h4 id="默认参数表达式"><a href="#默认参数表达式" class="headerlink" title="默认参数表达式"></a>默认参数表达式</h4><p>函数默认参数值非原始值传参时，默认参数是在函数调用时求值，也就是说在函数声明时，参数默认值是不确定的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="number">5</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> value++</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">first, second = getValue(</span>))</span>&#123;</div><div class="line">    <span class="keyword">return</span> first + second</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>,<span class="number">1</span>));  <span class="comment">//2</span></div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>));    <span class="comment">//6</span></div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>));    <span class="comment">//7</span></div></pre></td></tr></table></figure></p>
+<p>示例中，调用<code>add</code>不给<code>second</code>传值，就会调用<code>getValue()</code>对<code>second</code>求默认值，所以任何时候都可以改变默认值。</p>
+<p>因为默认参数是函数调用时求值，所以可以使用<strong>先定义的参数</strong>做为后定义参数的默认值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">first, second = first</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> first + second</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>,<span class="number">1</span>));</div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>));</div></pre></td></tr></table></figure></p>
+<p>先定义的参数访问了后定义的参数，会抛出错误。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">first=second, second</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> first + second</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>,<span class="number">1</span>));  <span class="comment">//2</span></div><div class="line"><span class="built_in">console</span>.log(add(<span class="literal">undefined</span>, <span class="number">1</span>)); <span class="comment">//抛出错误</span></div></pre></td></tr></table></figure></p>
+<p>这是由于函数参数有自己的临时死区，定义参数时会为每个参数创建一个新的标识符绑定，该绑定在初始化之前不可被引用。</p>
+<p>上面示例中调用<code>add(1, 1)</code>和<code>add(undefined, 1)</code>时，相当于<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//调用add(1, 1)</span></div><div class="line"><span class="keyword">let</span> first = <span class="number">1</span>;</div><div class="line"><span class="keyword">let</span> second = <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="comment">//调用add(undefined, 1)</span></div><div class="line"><span class="keyword">let</span> first = second;</div><div class="line"><span class="keyword">let</span> second = <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
+<p>当<code>first</code>初始化时<code>second</code>尚未初始化，此时<code>second</code>处于临时死区中，所以会导致程序抛出错误。</p>
+<h3 id="处理无命名参数"><a href="#处理无命名参数" class="headerlink" title="处理无命名参数"></a>处理无命名参数</h3><p>早先，利用<code>arguments</code>来检查函数的所有参数，而不必定义每个要用的参数。ES6中，通过引入不定参数的特性来解决这些问题。</p>
+<h4 id="不定参数"><a href="#不定参数" class="headerlink" title="不定参数"></a>不定参数</h4><p>在函数的命名参数前添加三个点（<code>...</code>）就表明这是一个不定参数，该参数是一个数组，包含着自它之后传入的所有参数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick</span>(<span class="params">object, ...keys</span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> result = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>, len = keys.length; i &lt; len; i++)&#123;</div><div class="line">        result[keys[i]] = object[keys[i]]</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> book = &#123;</div><div class="line">    title: <span class="string">'Understanding ECMAScript 6'</span>,</div><div class="line">    author: <span class="string">'Nicholas C. Zakas'</span>,</div><div class="line">    year: <span class="number">2016</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> bookData = pick(book, <span class="string">'author'</span>, <span class="string">'year'</span>)</div><div class="line"><span class="built_in">console</span>.log(bookData.author);  <span class="comment">//'Nicholas C. Zakas'</span></div><div class="line"><span class="built_in">console</span>.log(bookData.year);     <span class="comment">//2016</span></div></pre></td></tr></table></figure></p>
+<p>不定参数<code>keys</code>包含的是<code>object</code>之后传入的所有参数。</p>
+<blockquote>
+<p>函数的<code>length</code>属性统计的是函数命名参数的数量，不包括不定参数。<code>pick.length=1</code></p>
+</blockquote>
+<p>注意</p>
+<ul>
+<li><p>每个函数最多只能声明一个不定参数，而且要放在所有参数的末尾。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//语法错误：不定参数后不能有其他命名参数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick</span>(<span class="params">object, ...keys, last</span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> result = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>, len = keys.length; i &lt; len; i++)&#123;</div><div class="line">        result[keys[i]] = object[keys[i]]</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>不定参数不能用户对象字面量<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/set" target="_blank" rel="external">setter</a>之中，因为对象字面量<code>setter</code>的参数有且只能有一个。</p>
+</li>
+<li>无论是否使用不定参数，<code>arguments</code>对象总是包含所有传入函数的参数。</li>
+</ul>
+<h3 id="增强的Function构造函数"><a href="#增强的Function构造函数" class="headerlink" title="增强的Function构造函数"></a>增强的Function构造函数</h3><p><code>Function</code>构造函数通常用来动态创建新的函数，该构造函数接受字符串形式的参数，分别为函数的参数及函数体。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'first'</span>, <span class="string">'second'</span>, <span class="string">'return first + second'</span>);</div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>, <span class="number">1</span>));  <span class="comment">//2</span></div></pre></td></tr></table></figure></p>
+<p>ES6增强了<code>Function</code>构造函数的功能，支持在创建函数时定义默认参数和不定参数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'first'</span>, <span class="string">'second = first'</span>, <span class="string">'return first + second'</span>);</div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>, <span class="number">1</span>));  <span class="comment">//2</span></div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>));    <span class="comment">//2</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> pickFirst = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'...args'</span>, <span class="string">'return args[0]'</span>);</div><div class="line"><span class="built_in">console</span>.log(pickFirst(<span class="number">1</span>, <span class="number">2</span>));  <span class="comment">//1</span></div></pre></td></tr></table></figure></p>
+<h3 id="展开运算符"><a href="#展开运算符" class="headerlink" title="展开运算符"></a>展开运算符</h3><p>展开运算符可以将一个数组打散后作为各自独立的参数传入函数。例如，要从一个数组的中找出最大值，我们可以利用<code>Math.max()</code>方法，但<code>Math.max()</code>方法不允许传入数组。在ES5及早期版本，可能实现如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> values = [<span class="number">25</span>, <span class="number">50</span>, <span class="number">75</span>, <span class="number">100</span>];</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>, values)); <span class="comment">//100</span></div></pre></td></tr></table></figure></p>
+<p>在ES6中，在数组前添加<code>...</code>符号，就会将参数数组分割为各自独立的参数依次传入<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> values = [<span class="number">25</span>, <span class="number">50</span>, <span class="number">75</span>, <span class="number">100</span>];</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max(...values));  <span class="comment">//100</span></div></pre></td></tr></table></figure></p>
+<p>此外，展开运算符还可以与其他正常传入的参数混合使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> values = [<span class="number">-25</span>, <span class="number">50</span>, <span class="number">-75</span>, <span class="number">100</span>];</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max(...values, <span class="number">0</span>)); <span class="comment">//100</span></div></pre></td></tr></table></figure></p>
+<h3 id="name属性"><a href="#name属性" class="headerlink" title="name属性"></a>name属性</h3><p>ES6给所有函数新增了<code>name</code>属性，用来辨别函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//空函数</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> doAnotherThing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//空函数</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(doSomething.name);  <span class="comment">// 'doSomething'</span></div><div class="line"><span class="built_in">console</span>.log(doAnotherThing.name);  <span class="comment">//'doAnotherThing'</span></div></pre></td></tr></table></figure></p>
+<p>函数声明函数<code>name</code>属性对应着声明时的函数名称，匿名函数表达式函数<code>name</code>属性对应着被赋值变量的名称。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> doSomething = <span class="function"><span class="keyword">function</span> <span class="title">doSomethingElse</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//空函数</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    get firstName() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'Nicholas'</span></div><div class="line">    &#125;,</div><div class="line">    sayName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(person, <span class="string">'firstName'</span>);</div><div class="line"><span class="built_in">console</span>.log(doSomething.name);  <span class="comment">//'doSomethingElse'</span></div><div class="line"><span class="built_in">console</span>.log(person.sayName.name);   <span class="comment">//'sayName'</span></div><div class="line"><span class="built_in">console</span>.log(descriptor.get.name);   <span class="comment">//'get firstName'</span></div></pre></td></tr></table></figure></p>
+<p>函数表达式有一个名字，该名字比函数本身被赋值的变量权重高，所以<code>doSomething.name</code>的值为<code>doSomethingElse</code>。<code>firstName</code>是一个<code>getter</code>函数，他的名称会有<code>get</code>前缀，<code>setter</code>函数名称也有前缀<code>set</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> doSomething = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//空函数</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(doSomething.bind().name);   <span class="comment">//'bound doSomething'</span></div><div class="line"><span class="built_in">console</span>.log((<span class="keyword">new</span> <span class="built_in">Function</span>()).name);     <span class="comment">//'anonymous'</span></div></pre></td></tr></table></figure></p>
+<p>通过<code>bind()</code>函数创建的函数，其名称带有’bound’前缀，使用<code>Function</code>构造函数创建的函数，其名称为’anonymous’。</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/name" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/name</a></p>
+</blockquote>
+<h3 id="明确函数的多重用途"><a href="#明确函数的多重用途" class="headerlink" title="明确函数的多重用途"></a>明确函数的多重用途</h3><p>ES5及早起版本，函数具有多重功能，可以结合<code>new</code>作为构造函数使用，返回一个对象。</p>
+<p>函数有两个不同的内部方法：<code>[[Call]]</code>和<code>[[Construct]]</code>。通过<code>new</code>关键字调用函数时，执行的是<code>[[Construct]]</code>函数，它负责创建实例，然后执行函数体，将<code>this</code>绑定到实例上。如果不是通过<code>new</code>关键字调用，则执行<code>[[Call]]</code>函数，从而执行代码中的函数体。</p>
+<p>具有<code>[[Construct]]</code>方法的函数统称为构造函数，不是所有函数都有<code>[[Construct]]</code>方法，比如箭头函数。</p>
+<h4 id="ES5中判断函数是否作为构造函数调用"><a href="#ES5中判断函数是否作为构造函数调用" class="headerlink" title="ES5中判断函数是否作为构造函数调用"></a>ES5中判断函数是否作为构造函数调用</h4><p>在ES5中，判断函数是否通过<code>new</code>关键字被调用，流行的方式如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> <span class="keyword">instanceof</span> Person)&#123;</div><div class="line">        <span class="keyword">this</span>.name = name</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'必须通过new关键字来调用Person'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'Nicholas'</span>);</div><div class="line"><span class="keyword">var</span> notAPerson1 = Person(<span class="string">'Nicholas'</span>); <span class="comment">//抛出错误</span></div><div class="line"><span class="comment">//var notAperson = Person.call(person, 'Michael')； //有效</span></div></pre></td></tr></table></figure></p>
+<p>这个方法并不完全可靠，因为可以通过<code>call()</code>或者<code>apply()</code>方法将<code>this</code>绑定到<code>Person</code>的实例上。</p>
+<h4 id="元属性new-target"><a href="#元属性new-target" class="headerlink" title="元属性new.target"></a>元属性new.target</h4><p>元属性是指非对象属性，其可以提供非对象目标的补充信息（例如<code>new</code>）。当函数调用<code>[[Construct]]</code>方法时，<code>new.target</code>被赋值为<code>new</code>操作符的目标，通常是新创建实例的构造函数。当函数调用<code>[[Call]]</code>方法，则<code>new.target</code>的值为<code>undefined</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="keyword">new</span>.target !== <span class="string">'undefined'</span>)&#123;</div><div class="line">        <span class="keyword">this</span>.name = name</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'必须通过new关键字来调用Person'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'Nicholas'</span>);</div><div class="line"><span class="keyword">var</span> notAperson = Person.call(person, <span class="string">'Michael'</span>);  <span class="comment">//抛出错误</span></div></pre></td></tr></table></figure></p>
+<p>也可以检查是否被某个特定构造函数所调用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">new</span>.target === Person)&#123;</div><div class="line">        <span class="keyword">this</span>.name = name</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'必须通过new关键字来调用Person'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">AnotherPerson</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    Person.call(<span class="keyword">this</span>, name)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'Nicholas'</span>);</div><div class="line"><span class="keyword">var</span> anotherPerson = <span class="keyword">new</span> AnotherPerson(<span class="string">'Nicholas'</span>); <span class="comment">//抛出错误</span></div></pre></td></tr></table></figure></p>
+<p><code>new AnotherPerson(&#39;Nicholas&#39;)</code>调用时，真正的调用<code>Person.call(this, name)</code>没有使用关键词，因此<code>new.target</code>的值为<code>undefined</code>抛出错误。</p>
+<h3 id="块级函数"><a href="#块级函数" class="headerlink" title="块级函数"></a>块级函数</h3><p>ES5中，严格模式下，当在代码块内部声明函数时，程序抛出错误。ES6中，严格模式，在代码块中的声明的函数，会被提升块级作用域顶部，函数表达式不会被提升，一旦代码块结束执行，函数销毁。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> doSomething);  <span class="comment">//'function'</span></div><div class="line">    <span class="comment">//console.log(typeof doAnotherThing); //抛出错误</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">//空函数</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">let</span> doAnotherThing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">//空函数</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> doSomething);  <span class="comment">//'undefined'</span></div></pre></td></tr></table></figure></p>
+<p>当执行到<code>typeof doAnotherThing</code>时，由于尚未执行<code>let</code>语句声明，<code>doAnotherThing</code>还在当前块作用域的临时死区，程序被迫终端执行。</p>
+<blockquote>
+<p>ES6规定，函数参数使用了默认值、解构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错。</p>
+</blockquote>
+<p>非严格模式下，可以在外围函数或全局作用域访问和调用（定义后？）。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> doSomething);  <span class="comment">//'undefined' node v8.9.0</span></div><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> doSomething);  <span class="comment">//'function'</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">//空函数</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> doSomething);  <span class="comment">//'function'</span></div></pre></td></tr></table></figure></p>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>箭头函数是一种使用箭头（<code>=&gt;</code>）定义函数的新语法，它与以前的函数有些许不同。</p>
+<ul>
+<li>没有<code>this</code>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/super" target="_blank" rel="external"><code>super</code></a>、<code>argument</code>和<code>new.target</code>绑定，这些值都由外围最近一层非箭头函数决定。</li>
+<li>不能通过<code>new</code>关键字调用，因为箭头函数没有<code>[[Construct]]</code>方法。</li>
+<li>没有原型，由于不能通过<code>new</code>关键字调用，因而没有构建原型的需求，所以箭头函数不存在<code>prototype</code>这个属性</li>
+<li>不支持重复命名参数，无论在严格模式还是非严格模式。传统函数只有在严格模式下才不支持。</li>
+</ul>
+<h4 id="箭头函数语法"><a href="#箭头函数语法" class="headerlink" title="箭头函数语法"></a>箭头函数语法</h4><p>当箭头函数只有一个参数时，可以直接写参数名，箭头紧随其后，箭头右侧的表达式被求值后便立即返回。当箭头函数有多个参数时，要给参数加上括号。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> reflect = <span class="function"><span class="params">value</span> =&gt;</span> value;</div><div class="line"></div><div class="line"><span class="comment">//相当于</span></div><div class="line"><span class="keyword">let</span> reflect = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> value</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> sum = <span class="function">(<span class="params">num1, num2</span>) =&gt;</span> num1 + num2;</div><div class="line"></div><div class="line"><span class="comment">//相当于</span></div><div class="line"><span class="keyword">let</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> num1 + num2;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当函数没有参数时，也要在声明的时候写一对空括号。当函数体有多个表达式时，需要用花括号包裹函数体，如果需要返回值，就得显示定义一个返回值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> getName = <span class="function"><span class="params">()</span> =&gt;</span> <span class="string">'Nicholas'</span>;</div><div class="line"></div><div class="line"><span class="comment">//相当于</span></div><div class="line"><span class="keyword">let</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'Nicholas'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> min = <span class="function">(<span class="params">num1, num2</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span>(num1 &gt; num2)&#123;</div><div class="line">        <span class="keyword">return</span> num2</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> num1</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//相当于</span></div><div class="line"><span class="keyword">let</span> nim = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(num1 &gt; num2)&#123;</div><div class="line">        <span class="keyword">return</span> num2</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> num1</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当函数体只有一个表达式，并且返回一个对象字面里时，需要将其包裹在小括号内，以区分函数体。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> getTemItem = <span class="function"><span class="params">id</span> =&gt;</span> (&#123;<span class="attr">id</span>: id, <span class="attr">name</span>: <span class="string">'Temp'</span>&#125;)</div></pre></td></tr></table></figure></p>
+<h3 id="尾调优化"><a href="#尾调优化" class="headerlink" title="尾调优化"></a>尾调优化</h3><p>尾调用指的是函数做为另一个函数的最后一条语句调用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> doSomethingElse()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在ES5的引擎中，尾调用的实现与其他函数调用的实现类似：创建一个新的栈帧，将其推入调用栈来表示函数调用。也就是说在循环调用中，每一个未用完的栈帧都会保存在内存中，当调用栈变得过大时会造成程序问题。</p>
+<h4 id="ES6中的尾调优化"><a href="#ES6中的尾调优化" class="headerlink" title="ES6中的尾调优化"></a>ES6中的尾调优化</h4><p>ES6，在严格模式下，如果满足以下条件，JavaScript引擎自动优化（主要看引擎支持），尾调用不再创建新的栈帧，而是清除并重用当前栈帧。</p>
+<ul>
+<li>尾调用不妨问当前栈帧的变量（也就是说函数不是一个闭包）</li>
+<li>在函数内部，尾调用时最后一条语句</li>
+<li>尾调用结果作为函数值返回<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//优化后</span></div><div class="line">    <span class="keyword">return</span> doSomethingElse()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这个函数中，尾调用<code>doSomethingElse</code>的结果立即返回，不调用任何局部作用域变量。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//无法优化，无返回</span></div><div class="line">    doSomethingElse()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个函数，不返回最终结果，无法被优化<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//无法优化，返回值执行其他操作</span></div><div class="line">    <span class="keyword">return</span> <span class="number">1</span> + doSomethingElse()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在尾调用返回后执行其他操作，无法被优化<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//无法优化，调用不再尾部</span></div><div class="line">    <span class="keyword">let</span> result = doSomethingElse()</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>把函数调用的结果存储在一个变量里，最后再返回这个变量，由于没有立即返回<code>doSomethingElse</code>函数的值，无法被优化<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> num = <span class="number">1</span>,</div><div class="line">        func = <span class="function"><span class="params">()</span> =&gt;</span> num;</div><div class="line">    <span class="comment">//无法优化，该函数是一个闭包</span></div><div class="line">    <span class="keyword">return</span> func();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>func</code>函数访问局部变量<code>num</code>，无法被优化</p>
+<h4 id="利用尾调用优化"><a href="#利用尾调用优化" class="headerlink" title="利用尾调用优化"></a>利用尾调用优化</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">n</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">1</span>)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="comment">//无法优化</span></div><div class="line">        <span class="keyword">return</span> n * factorial(n - <span class="number">1</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面是一个阶乘函数，由于在递归调用前执行了乘法操作，所以阶乘函数无法被优化<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">n, p = <span class="number">1</span></span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">1</span>)&#123;</div><div class="line">        <span class="keyword">return</span> p * <span class="number">1</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="comment">//优化后</span></div><div class="line">        <span class="keyword">let</span> result = n * p;</div><div class="line">        <span class="keyword">return</span> factorial(n - <span class="number">1</span>, result)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个重写后的<code>factorial</code>函数，参数<code>p</code>用来保存乘法结果，下一次迭代可以取出它用于计算。在线ES6引擎就可以优化递归调用了。</p>
+<blockquote>
+<p>ES6的尾调优化，最终还是取决于JavaScript引擎是否支持。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/13/《深入理解ES6》之字符串和正则表达式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -324,6 +579,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/JavaScript/" itemprop="url" rel="index">
                     <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/《深入理解ES6》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解ES6》</span>
                   </a>
                 </span>
 
@@ -418,8 +684,8 @@
 <li>对于粘滞正则表达式，如果使用<code>^</code>匹配字符串开端，只会从字符串的起始位置或者多行模式的首行进行匹配。如果此时<code>lastIndex</code>值不为0，则永远不会匹配到结果</li>
 </ul>
 <blockquote>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank" rel="external">资料1</a></p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="external">资料2</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions</a></p>
 </blockquote>
 <h4 id="正则表达式复制"><a href="#正则表达式复制" class="headerlink" title="正则表达式复制"></a>正则表达式复制</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/ab/i</span>,</div><div class="line">    reg2 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(reg1,<span class="string">'g'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(reg2.toString());   <span class="comment">//  /ab/g</span></div></pre></td></tr></table></figure>
 <p>在ES5环境中，<code>RegExp</code>构造函数，第一个参数为正则表达式时不可以使用第二个参数，ES6中修改了这个行为</p>
@@ -555,6 +821,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/JavaScript/" itemprop="url" rel="index">
                     <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/《深入理解ES6》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解ES6》</span>
                   </a>
                 </span>
 
@@ -1112,7 +1389,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1123,7 +1400,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1134,7 +1411,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1244,12 +1521,12 @@
 
   
   
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/jquery/2.2.3/jquery.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/fastclick/1.0.6/fastclick.min.js"></script>
   
 
   
@@ -1259,17 +1536,17 @@
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/velocity/1.2.1/velocity.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/velocity/1.2.1/velocity.ui.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="https://lib.baomitu.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
   
 
 
@@ -1327,6 +1604,19 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
 
 
 
