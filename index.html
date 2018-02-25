@@ -281,6 +281,223 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/25/相等操作符（==）的隐式转换/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CoalYa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CoalYa's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/25/相等操作符（==）的隐式转换/" itemprop="url">相等操作符（==）的隐式转换</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T04:21:02-08:00">
+                2018-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="相等操作符（-）的隐式转换"><a href="#相等操作符（-）的隐式转换" class="headerlink" title="相等操作符（==）的隐式转换"></a>相等操作符（==）的隐式转换</h2><p>使用相等操作符，当两个操作数类型不相等时，会在比较前尝试将其转换为相同类型。转换规则如下</p>
+<ul>
+<li>数字和字符串比较，字符串会转换成数字值（<code>ToNumber</code>）</li>
+<li>其中一个操作数为布尔值，会将布尔值转换为数值，如果为<code>true</code>则转换为<code>1</code>，如果为<code>false</code>则转换为<code>0</code></li>
+<li><code>null == undefined</code>和<code>undefined == null</code>返回<code>true</code></li>
+<li>一个对象和数字或字符串比较，JavaScript会尝试返回对象的默认值。操作符会尝试通过<code>valueOf</code>和<code>toString</code>将对象转换成原始值（<code>ToPrimitive</code>）</li>
+<li>两个操作数均为对象，当它们的引用相同则返回<code>true</code></li>
+</ul>
+<blockquote>
+<p><code>NaN == NaN;   //false +0 == -0;   //true</code> </p>
+<p>原始数据 （原始值、原始数据类型）是一个非 <code>object</code> 类型并且没有自己的方法的数据。在 JavaScript 中，有六种原始数据类型：<code>string</code>，<code>number</code>，<code>boolean</code>，<code>null</code>，<code>undefined</code>，<code>symbol</code>。除了<code>null</code>和<code>undefined</code>，所有原始值都有包裹这个原始值的等价对象，这个包裹对象的<code>valueOf()</code>方法返回原始值。</p>
+</blockquote>
+<h3 id="ToNumber和ToPrimitive"><a href="#ToNumber和ToPrimitive" class="headerlink" title="ToNumber和ToPrimitive"></a><code>ToNumber</code>和<code>ToPrimitive</code></h3><p>上述转换涉及到两个内部的方法<code>ToNumber</code>和<code>ToPrimitive</code>。</p>
+<h4 id="ToNumber"><a href="#ToNumber" class="headerlink" title="ToNumber"></a><code>ToNumber</code></h4><p><code>ToNumber</code>方法对不同类型返回结果如下</p>
+<ul>
+<li>布尔值，<code>true</code>–&gt;<code>1</code>，<code>false</code>–&gt;<code>+0</code></li>
+<li><code>undefined</code>–&gt;<code>NaN</code></li>
+<li><code>null</code>–&gt;<code>+0</code></li>
+<li>数字，数字对应值</li>
+<li>字符串，<strong>只包含</strong>有效数字格式字符串，转换为对应十进制数值（空字符转化为<code>0</code>），其他转换为<code>NaN</code>。<ul>
+<li>字符串只包含数字（包括前面正负号）字符串’123’–&gt;<code>123</code>，’011’–&gt;<code>11</code>（前导零忽略）</li>
+<li>字符串是有效的浮点数，转换为对应的浮点数值</li>
+<li>字符串是有效的十六进制’0x12’–&gt;<code>18</code></li>
+</ul>
+</li>
+<li>对象，<code>ToNumber(ToPrimitive(value, Number))</code><blockquote>
+<p><a href="http://www.ecma-international.org/ecma-262/5.1/#sec-9.3" target="_blank" rel="external">http://www.ecma-international.org/ecma-262/5.1/#sec-9.3</a></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="ToPrimitive"><a href="#ToPrimitive" class="headerlink" title="ToPrimitive"></a><code>ToPrimitive</code></h4><p><code>ToPrimitive(input, [PreferredType])</code>将<em>input</em>转换成原始值，如果一个对象可以转换成多种原始值，可以通过<em>PreferredType</em>转换成指定类型。</p>
+<p><code>ToPrimitive</code>转换规则如下</p>
+<ul>
+<li><code>input</code>为原始值，则返回输入值</li>
+<li><code>input</code>为对象，则需要通过<em>PreferredType</em>来确定</li>
+</ul>
+<h5 id="PreferredType设置为String"><a href="#PreferredType设置为String" class="headerlink" title="PreferredType设置为String"></a>PreferredType设置为String</h5><ul>
+<li>调用该对象<code>toString</code>方法，结果是原始值，则返回结果</li>
+<li>调用该对象<code>valueOf</code>方法，结果是原始值，则返回结果</li>
+<li>抛出<code>TypeError</code>异常</li>
+</ul>
+<h5 id="PreferredType设置为Number"><a href="#PreferredType设置为Number" class="headerlink" title="PreferredType设置为Number"></a>PreferredType设置为Number</h5><ul>
+<li>调用该对象<code>valueOf</code>方法，结果是原始值，则返回结果</li>
+<li>调用该对象<code>toString</code>方法，结果是原始值，则返回结果</li>
+<li>抛出<code>TypeError</code>异常</li>
+</ul>
+<p>当<em>PreferredType</em>没有设置值时，如果该对象为<code>Date</code>类型，行为与设置String一致，其他与设置Number一致。</p>
+<blockquote>
+<p><a href="http://www.ecma-international.org/ecma-262/5.1/#sec-9.1" target="_blank" rel="external">http://www.ecma-international.org/ecma-262/5.1/#sec-9.1</a><br><a href="http://www.ecma-international.org/ecma-262/5.1/#sec-8.12.8" target="_blank" rel="external">http://www.ecma-international.org/ecma-262/5.1/#sec-8.12.8</a></p>
+</blockquote>
+<h3 id="valueOf和toString方法"><a href="#valueOf和toString方法" class="headerlink" title="valueOf和toString方法"></a><code>valueOf</code>和<code>toString</code>方法</h3><p><code>Object.prototype</code>包含<code>valueOf</code>和<code>toString</code>这两个方法，所以继承至<code>Object</code>的对象都可以调用（如果对象重写了该方法，则调用自身）。</p>
+<h4 id="valueOf-NaN"><a href="#valueOf-NaN" class="headerlink" title="valueOf"></a><code>valueOf</code></h4><p>JavaScript的内置对象都重写了<code>valueOf</code>方法，以实现更适合自身的功能需要。常见的返回值如下</p>
+<ul>
+<li>对象有原始值（<code>number</code>,<code>string</code>,<code>boolean</code>,<code>symbol</code>），返回原始值</li>
+<li><code>Date</code>对象，返回毫秒数（UTC）</li>
+<li>其他，返回对象本身</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> num = <span class="number">123</span>;</div><div class="line"><span class="built_in">console</span>.log(num.valueOf());     <span class="comment">//123</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> str = <span class="string">'hello'</span>;</div><div class="line"><span class="built_in">console</span>.log(str.valueOf());     <span class="comment">//'hello'</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> bool = <span class="literal">true</span>;</div><div class="line"><span class="built_in">console</span>.log(bool.valueOf());    <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> syb = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>);</div><div class="line"><span class="built_in">console</span>.log(syb.valueOf());     <span class="comment">//Symbol(foo)</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> arr = [<span class="string">'abc'</span>, <span class="number">1</span>, <span class="number">6</span>];</div><div class="line"><span class="built_in">console</span>.log(arr.valueOf() === arr);     <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"><span class="built_in">console</span>.log(foo.valueOf() === foo);     <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/.+/</span>);</div><div class="line"><span class="built_in">console</span>.log(reg.valueOf() === reg);     <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">    name: <span class="string">'张三'</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(obj.valueOf() === obj);     <span class="comment">//true</span></div></pre></td></tr></table></figure>
+<h4 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a><code>toString</code></h4><p>调用<code>toString</code>返回值如下</p>
+<ul>
+<li>该对象重写了<code>toString</code>方法，如<code>Number</code>、<code>Boolean</code>、<code>String</code>、<code>Array</code>、<code>Date</code>、<code>Function</code>、<code>RegExp</code></li>
+<li><code>null</code>和<code>undefined</code>通过<code>call</code>调用<code>toString</code>（<code>Object.prototype.toString.call(null)</code>），分别返回<code>[object Null]</code>和<code>[object Undefined]</code></li>
+<li>否则继承自<code>Object.prototype</code>，返回 <code>&#39;[object type]&#39;</code>，其中<code>type</code>是对象的类型</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>.prototype.hasOwnProperty(<span class="string">'toString'</span>));   <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>.prototype.hasOwnProperty(<span class="string">'toString'</span>));  <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.prototype.hasOwnProperty(<span class="string">'toString'</span>));   <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Symbol</span>.prototype.hasOwnProperty(<span class="string">'toString'</span>));   <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Date</span>.prototype.hasOwnProperty(<span class="string">'toString'</span>));     <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.prototype.hasOwnProperty(<span class="string">'toString'</span>));   <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.prototype.hasOwnProperty(<span class="string">'toString'</span>)); <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> num = <span class="number">123</span>;</div><div class="line"><span class="built_in">console</span>.log(num.toString());    <span class="comment">//'123'</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> bol = <span class="literal">true</span>;</div><div class="line"><span class="built_in">console</span>.log(bol.toString());    <span class="comment">//'true'</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> str = <span class="string">'hello'</span>;</div><div class="line"><span class="built_in">console</span>.log(str.toString());    <span class="comment">//'hello'</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> syb = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>);</div><div class="line"><span class="built_in">console</span>.log(syb.toString());     <span class="comment">//'Symbol(foo)'</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line"><span class="built_in">console</span>.log(date.toString());   <span class="comment">//'Sun Feb 25 2018 02:34:47 GMT-0800 (PST)' 返回一个美式英语日期格式的字符串</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"><span class="built_in">console</span>.log(foo.toString());    <span class="comment">//'function ()&#123;&#125;' 返回表示当前函数源代码的字符串，包括 function关键字，形参列表，大括号，以及函数体中的内容</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/.+/</span>);</div><div class="line"><span class="built_in">console</span>.log(reg.toString());    <span class="comment">//'/.+/' 返回一个表示该正则表达式的字符串。</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> arr = [<span class="string">'abc'</span>, <span class="number">1</span>, <span class="number">6</span>];</div><div class="line"><span class="built_in">console</span>.log(arr.toString());    <span class="comment">//'abc,1,6' 返回值经调用 join() 方法连接（由逗号隔开）组成</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">    name: <span class="string">'张三'</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(obj.toString());    <span class="comment">//'[object Object]'</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString</a></p>
+</blockquote>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[] == !&#123;&#125;;  <span class="comment">//true</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>!</code>优先级比<code>==</code>高，<code>!{}</code>结果为<code>false</code></li>
+<li><code>[] == false</code>，其中一个操作数为布尔值，先将布尔值转为数值<code>ToNumber</code>，<code>false</code>转为数值结果为<code>0</code></li>
+<li><code>[] == 0</code>，对象与数值比较，将对象转换为原始值<code>ToPrimitive(value, Number)</code>（<code>Date</code>类型<code>ToPrimitive(value, String)</code>）。</li>
+<li>先调用<code>valueOf</code>方法，回返回<code>[]</code>本身，此时不是原始值，然后调用<code>toString</code>方法返回<code>&#39;&#39;</code>空</li>
+<li><code>&#39;&#39; == 0</code>字符串与数值比较，字符串转换为数值<code>ToNumber</code>，空字符转换为数值结果为<code>0</code>，所以最终表达式为<code>0 == 0</code>，返回<code>true</code></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/28/《深入理解ES6》之函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1389,7 +1606,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1411,7 +1628,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
