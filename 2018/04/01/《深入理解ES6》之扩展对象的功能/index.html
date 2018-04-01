@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="https://lib.baomitu.com/pace/1.0.2/pace.min.js"></script>
+  <link href="https://lib.baomitu.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://lib.baomitu.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="对象的扩展," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="对象类别ES6规范清晰定义了每一个类别的对象  普通对象  具有JavaScript对象所有的默认行为 特异对象  具有某些与默认行为不符的内部行为 标准对象  ES6规范中定义的对象，例如Array、Date等。标准对象既可以是普通对象，也可以是特异对象。 内建对象  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。  对象字面量语法扩展属性初始值的简写当一个">
+<meta name="keywords" content="对象的扩展">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《深入理解ES6》之扩展对象的功能">
+<meta property="og:url" content="http://yoursite.com/2018/04/01/《深入理解ES6》之扩展对象的功能/index.html">
+<meta property="og:site_name" content="CoalYa&#39;s Notes">
+<meta property="og:description" content="对象类别ES6规范清晰定义了每一个类别的对象  普通对象  具有JavaScript对象所有的默认行为 特异对象  具有某些与默认行为不符的内部行为 标准对象  ES6规范中定义的对象，例如Array、Date等。标准对象既可以是普通对象，也可以是特异对象。 内建对象  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。  对象字面量语法扩展属性初始值的简写当一个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-01T10:03:52.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《深入理解ES6》之扩展对象的功能">
+<meta name="twitter:description" content="对象类别ES6规范清晰定义了每一个类别的对象  普通对象  具有JavaScript对象所有的默认行为 特异对象  具有某些与默认行为不符的内部行为 标准对象  ES6规范中定义的对象，例如Array、Date等。标准对象既可以是普通对象，也可以是特异对象。 内建对象  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。  对象字面量语法扩展属性初始值的简写当一个">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/01/《深入理解ES6》之扩展对象的功能/"/>
+
+
+
+
+
+  <title>《深入理解ES6》之扩展对象的功能 | CoalYa's Notes</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110561175-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CoalYa's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">有态度很难，就做点记录吧。。。</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/01/《深入理解ES6》之扩展对象的功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CoalYa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CoalYa's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">《深入理解ES6》之扩展对象的功能</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T03:02:40-07:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/《深入理解ES6》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解ES6》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="对象类别"><a href="#对象类别" class="headerlink" title="对象类别"></a>对象类别</h3><p>ES6规范清晰定义了每一个类别的对象</p>
+<ul>
+<li><strong>普通对象</strong>  具有JavaScript对象所有的默认行为</li>
+<li><strong>特异对象</strong>  具有某些与默认行为不符的内部行为</li>
+<li><strong>标准对象</strong>  ES6规范中定义的对象，例如<code>Array</code>、<code>Date</code>等。标准对象既可以是普通对象，也可以是特异对象。</li>
+<li><strong>内建对象</strong>  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。</li>
+</ul>
+<h3 id="对象字面量语法扩展"><a href="#对象字面量语法扩展" class="headerlink" title="对象字面量语法扩展"></a>对象字面量语法扩展</h3><h4 id="属性初始值的简写"><a href="#属性初始值的简写" class="headerlink" title="属性初始值的简写"></a>属性初始值的简写</h4><p>当一个对象的属性与本地变量名同名时，不必再写冒号和值，简单的写属性名即可。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//ES5</span></div><div class="line"><span class="comment">// function createPerson(name, age)&#123;</span></div><div class="line"><span class="comment">//     return &#123;</span></div><div class="line"><span class="comment">//         name: name,</span></div><div class="line"><span class="comment">//         age: age</span></div><div class="line"><span class="comment">//     &#125;</span></div><div class="line"><span class="comment">// &#125;</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name, age</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        name,</div><div class="line">        age</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当对象字面量里只有一个属性的名称时，JavaScript引擎会在可访问作用域中查找同名变量。如果找到，则变量的值被赋给对象字面量里的同名属性。</p>
+<h4 id="对象方法的简写"><a href="#对象方法的简写" class="headerlink" title="对象方法的简写"></a>对象方法的简写</h4><p>之前的版本，如果为对象添加方法，必须通过指定名称并完整定义函数来实现。再ES6中，语法更加简洁，消除了冒号和关键字<code>function</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//ES5</span></div><div class="line"><span class="comment">// var person = &#123;</span></div><div class="line"><span class="comment">//     name: 'Nicholas',</span></div><div class="line"><span class="comment">//     sayName: function() &#123;</span></div><div class="line"><span class="comment">//         console.log(this.name);</span></div><div class="line"><span class="comment">//     &#125;</span></div><div class="line"><span class="comment">// &#125;</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    name: <span class="string">'Nicholas'</span>,</div><div class="line">    sayName() &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="可计算属性名"><a href="#可计算属性名" class="headerlink" title="可计算属性名"></a>可计算属性名</h4><p>在ES5及早期版本中，引用属性，有点方法和方括号方法。当引用一个通过计算得到的属性名或者改属性名是一个非法的标识符（数字，字母，下划线，美元符，数字不能开头），只能使用方括号方法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = &#123;&#125;,</div><div class="line">    lastName = <span class="string">'last name'</span>;</div><div class="line"></div><div class="line">person[<span class="string">'first name'</span>] = <span class="string">'Nicholas'</span>;</div><div class="line">person[lastName] = <span class="string">'Zakas'</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">'first name'</span>]); <span class="comment">//'Nicholas'</span></div><div class="line"><span class="built_in">console</span>.log(person[lastName]);  <span class="comment">//'Zakas'</span></div></pre></td></tr></table></figure></p>
+<p>在对象字面量中，可以直接使用字符串字面量作为属性名称（如果包含非法的标识符，属性名加引号）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    <span class="string">'first name'</span>: <span class="string">'Nicholas'</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">'first name'</span>]); <span class="comment">//'Nicholas'</span></div></pre></td></tr></table></figure></p>
+<p>如果属性名称<code>first name</code>被包含在一个变量中，或者需要通过计算才能得到该变量的值，那么在ES5是无法为一个对象字面量定义该属性。</p>
+<p>在ES6中，可以在对象字面量中使用可计算属性名称，其语法与引用对象实例的可计算属性名称相同使用方括号。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> lastName = <span class="string">'last name'</span>;</div><div class="line"> </div><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    <span class="string">'first name'</span>: <span class="string">'Nicholas'</span>,</div><div class="line">    [lastName]: <span class="string">'Zakas'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">'first name'</span>]);  <span class="comment">//'Nicholas'</span></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">'last name'</span>]);  <span class="comment">//'Zakas'</span></div></pre></td></tr></table></figure></p>
+<p>在对象字面量中使用方括号表示的该属性名称是可计算的，他的内容将被求值最终转化为一个字符串，所以可以使用表达式作为属性的可计算名称<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> suffix = <span class="string">'name'</span>;</div><div class="line"></div><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    [<span class="string">'first '</span> + suffix]: <span class="string">'Nicholas'</span>,</div><div class="line">    [<span class="string">'last '</span> + suffix]: <span class="string">'Zakas'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">'first name'</span>]);  <span class="comment">//'Nicholas'</span></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">'last name'</span>]);  <span class="comment">//'Zakas'</span></div></pre></td></tr></table></figure></p>
+<p>任何可用于对象实例括号记法的属性名，也可以作为对象字面量中的计算属性名。</p>
+<h3 id="新增方法"><a href="#新增方法" class="headerlink" title="新增方法"></a>新增方法</h3><h4 id="Object-is-方法"><a href="#Object-is-方法" class="headerlink" title="Object.is()方法"></a>Object.is()方法</h4><p>在JavaScript中比较两个值时，可以使用相等运算符（<code>==</code>）或全等运算符（<code>===</code>），前者会触发强制类型转换。但是全等运算符也不完全准确，比如+0和-0，使用全等运算符<code>===</code>进行比较，等到的是两者相等。</p>
+<p>ES6中引入<code>Object.is()</code>方法来弥补全等运算符的不准确运算。改方法接受两个参数，如果这两个参数类型并且值相同，则返回<code>true</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="number">-0</span> == +<span class="number">0</span>);  <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="number">-0</span> === +<span class="number">0</span>); <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.is(<span class="number">-0</span>,+<span class="number">0</span>));  <span class="comment">//false</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="literal">NaN</span> == <span class="literal">NaN</span>);    <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="literal">NaN</span> === <span class="literal">NaN</span>);   <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.is(<span class="literal">NaN</span>, <span class="literal">NaN</span>));   <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+<h4 id="Object-assign-方法"><a href="#Object-assign-方法" class="headerlink" title="Object.assign()方法"></a>Object.assign()方法</h4><p><code>Object.assign</code>用来实现一个对象接收其他对象的属性和方法，可以接受任意数量的源对象，并按指定顺序将属性复制到接收对象中。如果有同名属性，排位靠后的源对象会覆盖前面的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> receiver = &#123;&#125;;</div><div class="line"><span class="built_in">Object</span>.assign(receiver, </div><div class="line">    &#123;</div><div class="line">        type: <span class="string">'js'</span>,</div><div class="line">        name: <span class="string">'file.js'</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        type: <span class="string">'css'</span></div><div class="line">    &#125;</div><div class="line">)</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(receiver.type); <span class="comment">//'css'，后面同名属性覆盖前面</span></div><div class="line"><span class="built_in">console</span>.log(receiver.name); <span class="comment">//'file.js'</span></div></pre></td></tr></table></figure>
+<p><code>Object.assign()</code>方法不能将提供者的访问器属性复制到接收对象中。<code>Object.assign()</code>方法执行的式赋值操作，所以访问器属性最终会转变为接收对象中的一个数据属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> receiver = &#123;&#125;,</div><div class="line">    supplier = &#123;</div><div class="line">        get name()&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">'file.js'</span></div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.assign(receiver, supplier);</div><div class="line"></div><div class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(receiver, <span class="string">'name'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(descriptor.value);  <span class="comment">//'file.js'</span></div><div class="line"><span class="built_in">console</span>.log(descriptor.get);    <span class="comment">//undefined</span></div></pre></td></tr></table></figure>
+<h3 id="重复的对象字面量属性"><a href="#重复的对象字面量属性" class="headerlink" title="重复的对象字面量属性"></a>重复的对象字面量属性</h3><p>ES5中严格模式会对对象字面量的重复属性进行校验，存在重复同名属性时抛出错误。ES6中，无论严格模式还是非严格模式，不再检查重复属性，对于重复属性，都会选取最后一个。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    name: <span class="string">'Nicholas'</span>,</div><div class="line">    name: <span class="string">'Greg'</span>    <span class="comment">//ES6严格模式下没有错误</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person.name);   <span class="string">'Greg'</span></div></pre></td></tr></table></figure>
+<h3 id="自有属性枚举顺序"><a href="#自有属性枚举顺序" class="headerlink" title="自有属性枚举顺序"></a>自有属性枚举顺序</h3><p>ES6严格规定了对象的自有属性被枚举时的返回顺序，这会影响到<code>Object.getOwnPropertyNames()</code>以及<code>Reflect.ownKeys</code>返回属性的方式，<code>Object.assign()</code>方法处理属性的顺序也将随之改变。规则是</p>
+<ul>
+<li>所有数字键按升序拍讯</li>
+<li>所有字符串键按照它们被加入对象的顺序排序</li>
+<li>所有<code>symbol</code>键按照他们被加入对象的顺序排序</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    a: <span class="number">1</span>,</div><div class="line">    <span class="number">2</span>: <span class="number">1</span>,</div><div class="line">    c: <span class="number">1</span>,</div><div class="line">    <span class="number">1</span>: <span class="number">1</span></div><div class="line">&#125;</div><div class="line">obj.b = <span class="number">1</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyNames(obj).join(<span class="string">''</span>));  <span class="comment">//12acb</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>for-in</code>循环，没有一个明确的枚举顺序。<code>Object.keys()</code>和<code>JSON.stringify()</code>方法和<code>for-in</code>使用相同的枚举顺序。</p>
+</blockquote>
+<h3 id="增加对象原型"><a href="#增加对象原型" class="headerlink" title="增加对象原型"></a>增加对象原型</h3><h4 id="改变原型对象"><a href="#改变原型对象" class="headerlink" title="改变原型对象"></a>改变原型对象</h4><p>正常情况下，无论是通过构造函数还是<code>Object.create()</code>方法创建对象，其原型是在对象被创建时指定的。在ES5中缺少对象在实例化后改变原型的标准方法。</p>
+<p>ES6中，添加了<code>Object.setPrototypeof()</code>方法，通过该方法可以改变指定对象的原型，它接受两个参数，被改变原型的对象以及替代第一个参数原型的对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    getGreeting()&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'hello'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> dog = &#123;</div><div class="line">    getGreeting()&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'woof'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> friend = <span class="built_in">Object</span>.create(person); </div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());  <span class="comment">//'hello'</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(friend) === person);  <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, dog);</div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());  <span class="comment">//'woof'</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(friend) === dog); <span class="comment">//true</span></div></pre></td></tr></table></figure>
+<h4 id="Super"><a href="#Super" class="headerlink" title="Super"></a>Super</h4><p>ES6引入<code>Super</code>关键字，<code>Super</code>引用相当于指向对象原型的指针，他可以便捷访问对象原型。比如需要重写对象实例的方法，有需要调用与它同名的原型方法，ES5中可以实现如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    getGreeting()&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'hello'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> dog = &#123;</div><div class="line">    getGreeting()&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'woof'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">this</span>).getGreeting.call(<span class="keyword">this</span>) + <span class="string">', hi'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//将原型设置为person</span></div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, person);</div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());</div><div class="line"></div><div class="line"><span class="comment">//将原型设置为dog</span></div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, dog);</div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());</div></pre></td></tr></table></figure></p>
+<p>示例中，<code>friend</code>对象的<code>getGreeting()</code>调用了同名的原型方法。<code>Object.getPrototypeOf()</code>方法确保调用正确的原型，<code>call(this)</code>确保正确设置原型方法中的<code>this</code></p>
+<p>ES6中，可以简化上面的<code>getGreeting()</code>方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="comment">// return Object.getPrototypeOf(this).getGreeting.call(this) + ', hi';</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getGreeting() + <span class="string">', hi'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>Super</code>引用必须要在使用简写方法的对象中使用，如果在其他方法声明中使用会导致错误。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    getGreeting: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">//语法错误</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getGreeting() + <span class="string">', hi'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="正式的方法定义"><a href="#正式的方法定义" class="headerlink" title="正式的方法定义"></a>正式的方法定义</h3><p>ES6中正式将方法定义为一个函数，他会有一个内部的[[HomeObject]]属性来容纳这个方法从属的对象。<code>Super</code>的所有引用都通过[[HomeObject]]属性来确定。首先是在[[HomeObject]]属性上调用<code>Object.getPrototypeOf()</code>方法来检索原型的引用，然后搜索原型找到同名函数，最后设置<code>this</code>绑定并且调用相应的方法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    getGreeting()&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'hello'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    getGreeting: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// return Object.getPrototypeOf(this).getGreeting.call(this) + ', hi';</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getGreeting() + <span class="string">', hi'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, person);</div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());</div></pre></td></tr></table></figure></p>
+<p>示例中，<code>friend.getGreeting()</code>方法的[[HomeObject]]属性值是<code>friend</code>，<code>friend</code>的原型是<code>person</code>，所以<code>super.getGreeting()</code>等价于<code>person.getGreeting.call(this)</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/对象的扩展/" rel="tag"># 对象的扩展</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/25/相等操作符（==）的隐式转换/" rel="next" title="相等操作符（==）的隐式转换">
+                <i class="fa fa-chevron-left"></i> 相等操作符（==）的隐式转换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="CoalYa" />
+            
+              <p class="site-author-name" itemprop="name">CoalYa</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象类别"><span class="nav-number">1.</span> <span class="nav-text">对象类别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象字面量语法扩展"><span class="nav-number">2.</span> <span class="nav-text">对象字面量语法扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性初始值的简写"><span class="nav-number">2.1.</span> <span class="nav-text">属性初始值的简写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象方法的简写"><span class="nav-number">2.2.</span> <span class="nav-text">对象方法的简写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可计算属性名"><span class="nav-number">2.3.</span> <span class="nav-text">可计算属性名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增方法"><span class="nav-number">3.</span> <span class="nav-text">新增方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-is-方法"><span class="nav-number">3.1.</span> <span class="nav-text">Object.is()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-assign-方法"><span class="nav-number">3.2.</span> <span class="nav-text">Object.assign()方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复的对象字面量属性"><span class="nav-number">4.</span> <span class="nav-text">重复的对象字面量属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自有属性枚举顺序"><span class="nav-number">5.</span> <span class="nav-text">自有属性枚举顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加对象原型"><span class="nav-number">6.</span> <span class="nav-text">增加对象原型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#改变原型对象"><span class="nav-number">6.1.</span> <span class="nav-text">改变原型对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Super"><span class="nav-number">6.2.</span> <span class="nav-text">Super</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正式的方法定义"><span class="nav-number">7.</span> <span class="nav-text">正式的方法定义</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CoalYa</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/jquery/2.2.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/velocity/1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/velocity/1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
