@@ -281,6 +281,225 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/Symbol/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CoalYa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CoalYa's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/20/Symbol/" itemprop="url">Symbol</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T07:21:14+08:00">
+                2018-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/《深入理解ES6》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解ES6》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Symbol和Symbol属性"><a href="#Symbol和Symbol属性" class="headerlink" title="Symbol和Symbol属性"></a>Symbol和Symbol属性</h2><p><code>Symbol</code>是ES6引入的第6种原始类型数据。ES6之前，属性名都是字符串类型，<code>Symbol</code>可以为属性添加非字符串名称。</p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>所有原始值，除了<code>Symbol</code>以外都有各自的字面量形式。通过全局的<code>Symbol</code>函数来创建一个<code>Symbol</code>，<code>Symbol</code>函数接受一个可选参数，用来描述即将创建的<code>Symbol</code>，这段描述不可用于属性访问。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> firstName = <span class="built_in">Symbol</span>(<span class="string">'first name'</span>);</div><div class="line"><span class="keyword">let</span> person = &#123;&#125;;</div><div class="line">person[firstName] = <span class="string">'Nicholas'</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'first name'</span> <span class="keyword">in</span> person);    <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(person[firstName]);     <span class="comment">//'Nicholas'</span></div><div class="line"><span class="built_in">console</span>.log(firstName);     <span class="comment">//'Symbol(first name)'</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> firstName); <span class="comment">//'symbol'</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>不能通过<code>new</code>调用<code>Symbol</code>函数，这样会导致程序错误。<br>ES6扩展了<code>typeof</code>操作符，支持检测<code>Symbol</code>类型。<br><code>Symbol</code>的描述被存储在内部的<code>[[Description]]</code>属性中，只有调用<code>Symbol</code>的<code>toString</code>方法时才可以读取这个属性。执行<code>console.log</code>时，隐式调用了<code>firstName</code>的<code>toString</code>方法。</p>
+</blockquote>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>所有使用可计算属性名的地方，都可以使用<code>Symbol</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> firstName = <span class="built_in">Symbol</span>(<span class="string">'first name'</span>);</div><div class="line"><span class="comment">//使用一个可计算对象字面量属性</span></div><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    [firstName]: <span class="string">'Nicholas'</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">Object</span>.defineProperty(person, firstName, &#123;<span class="attr">writable</span>: <span class="literal">false</span>&#125;);</div><div class="line"><span class="keyword">let</span> lastName = <span class="built_in">Symbol</span>(<span class="string">'last name'</span>);</div><div class="line"><span class="built_in">Object</span>.defineProperties(person, &#123;</div><div class="line">    [lastName]: &#123;</div><div class="line">        value: <span class="string">'Zakas'</span>,</div><div class="line">        writable: <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h3 id="Symbol共享体系"><a href="#Symbol共享体系" class="headerlink" title="Symbol共享体系"></a>Symbol共享体系</h3><p>有时可能需要在不同的代码中共享同一个<code>Symbol</code>，使用<code>Symbol.for()</code>方法，创建一个共享的<code>Symbol</code>。该方法接受一个参数，也就是即将创建的<code>Symbol</code>的字符串标识符，这个参数也作为<code>Symbol</code>的描述。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> uid = <span class="built_in">Symbol</span>.for(<span class="string">'uid'</span>);</div><div class="line"><span class="keyword">let</span> obj = &#123;&#125;;</div><div class="line"></div><div class="line">obj[uid] = <span class="string">'123'</span>;</div><div class="line"></div><div class="line"><span class="keyword">let</span> uid2 = <span class="built_in">Symbol</span>.for(<span class="string">'uid'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(uid === uid2);  <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(obj[uid2]);     <span class="comment">//123</span></div><div class="line"><span class="built_in">console</span>.log(uid2);          <span class="comment">//'Symbol(uid)'</span></div></pre></td></tr></table></figure></p>
+<p><code>Symbol.for()</code>方法首先在全局<code>Symbol</code>注册表中搜索键为<code>uid</code>的<code>Symbol</code>是否存在，如果存在，返回已有的<code>Symbol</code>。否则，创建一个新的<code>Symbol</code>，并使用这个键在<code>Symbol</code>全局注册表中注册，随即返回新的<code>Symbol</code>。</p>
+<p>可以使用<code>Symbol.keyFor()</code>方法在<code>Symbol</code>全局注册表中检索与<code>Symbol</code>有关的键。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> uid = <span class="built_in">Symbol</span>.for(<span class="string">'uid'</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Symbol</span>.keyFor(uid));    <span class="comment">//'uid'</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> uid2 = <span class="built_in">Symbol</span>.for(<span class="string">'uid'</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Symbol</span>.keyFor(uid2));   <span class="comment">//'uid'</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> uid3 = <span class="built_in">Symbol</span>(<span class="string">'uid'</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Symbol</span>.keyFor(uid3));   <span class="comment">//undefined</span></div></pre></td></tr></table></figure></p>
+<p><code>uid</code>和<code>uid2</code>都返回<code>&quot;uid&quot;</code>这个键，而在全局注册表中不存在<code>uid3</code>这个<code>Symbol</code>，也就不存在与之有关的键，所以返回<code>undefined</code>。</p>
+<h3 id="Symbol与类型强制转换"><a href="#Symbol与类型强制转换" class="headerlink" title="Symbol与类型强制转换"></a>Symbol与类型强制转换</h3><p>JavaScript中，某些情况下，会发生自动转换类型行为。然而，其他类型没有与<code>Symbol</code>逻辑等价的值，尤其是不能将<code>Symbol</code>强制转换成字符串和布尔值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> uid = <span class="built_in">Symbol</span>.for(<span class="string">'uid'</span>),</div><div class="line">    desc = <span class="built_in">String</span>(uid);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(desc);</div><div class="line"></div><div class="line"><span class="keyword">let</span> desc2 = uid + <span class="string">''</span>;   <span class="comment">//TypeError: Cannot convert a Symbol value to a string</span></div><div class="line"><span class="keyword">let</span> sum = uid/<span class="number">1</span>;    <span class="comment">//TypeError: Cannot convert a Symbol value to a number</span></div></pre></td></tr></table></figure></p>
+<p><code>String()</code>函数调用了<code>uid.toString</code>方法，返回字符串类型的<code>Symbol</code>描述里的内容。但是将<code>Symbol</code>强制转换成字符串或数字类型，会抛出错误。</p>
+<h3 id="Symbol属性检索"><a href="#Symbol属性检索" class="headerlink" title="Symbol属性检索"></a>Symbol属性检索</h3><p><code>Object.keys()</code>和<code>Object.getOwnPropertyNames()</code>方法可以检索对象中的属性名，前一个返回所有可枚举属性，后一个不考虑是否可枚举，一律返回。这两个方法都不支持<code>Symbol</code>属性。ES6中新增一个<code>Object.getOwnPropertySymbols()</code>方法检索对象中的<code>Symbol</code>属性，该方法返回一个包含所有<code>Symbol</code>自有属性（非继承）的数组。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> uid = <span class="built_in">Symbol</span>.for(<span class="string">'uid'</span>);</div><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">    [uid]: <span class="number">123</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> symbols = <span class="built_in">Object</span>.getOwnPropertySymbols(obj);</div><div class="line"><span class="built_in">console</span>.log(symbols);   <span class="comment">//[ Symbol(uid) ]</span></div></pre></td></tr></table></figure></p>
+<h3 id="通过well-known-Symbol暴露内部操作"><a href="#通过well-known-Symbol暴露内部操作" class="headerlink" title="通过well-known Symbol暴露内部操作"></a>通过well-known Symbol暴露内部操作</h3><p>ES6开放了以前JavaScript中常用的内部操作，并通过预定义一些well-known Symbol来表示。每一个这类<code>Symbol</code>都是<code>Symbol</code>对象的一个属性。这些well-known Symbol包括</p>
+<ul>
+<li><code>Symbol.hasInstance</code>一个在执行<code>instanceof</code>时调用的内部方法，用于检测对象的继承信息。</li>
+<li><code>Symbol.isConcatSpreadable</code>一个布尔值，用于表示当传递一个集合作为<code>Array.prototype.concat()</code>方法的参数时，是否应该将集合内的元素归整到同一层级。</li>
+<li><code>Symbol.iterator</code>一个返回迭代器方法</li>
+<li><code>Symbol.match</code>、<code>Symbol.replace</code>、<code>Symbol.search</code>、<code>Symbol.split</code>分别在调用<code>String.prototype.match()</code>、<code>String.prototype.replace()</code>、<code>String.prototype.search()</code>、<code>String.prototype.split()</code>方法时调用的方法</li>
+<li><code>Symbol.species</code>用于创建派生类的构造函数。</li>
+<li><code>Symbol.toPrimitive</code>一个返回对象原始值的方法</li>
+<li><code>Symbol.toStringTag</code>一个在调用<code>Object.prototype.toString()</code>方法时使用的字符串，用于创建对象描述。</li>
+<li><code>Symbol.unscopables</code>一个定义了一些不可被<code>with</code>语句引用的对象属性名称的对象集合。</li>
+</ul>
+<h4 id="Symbol-hasInstance"><a href="#Symbol-hasInstance" class="headerlink" title="Symbol.hasInstance"></a>Symbol.hasInstance</h4><p>每一个函数都有一个<code>Symbol.hasInstance</code>方法，用于确定对象是否是函数的实例。该方法在<code>Function.prototye</code>中定义，所有函数都继承了<code>instanceof</code>属性的默认行为。该方法不可写，不可配置并且不可枚举。</p>
+<p><code>Symbol.hasInstance</code>方法只接受一个参数，即要检查的值。如果传入的值是函数的实例，则返回<code>true</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myObject</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> myObject();</div><div class="line">obj <span class="keyword">instanceof</span> myObject;    <span class="comment">//true</span></div><div class="line">myObject[<span class="built_in">Symbol</span>.hasInstance](obj);  <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+<p>本质上，ES6只是将<code>instanceof</code>操作符重新定义为此方法的简写语法。现在引入调用后，就可以随意改变<code>instanceof</code>的运行方式了。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myObject</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//给myObject定义一个Symbol.hasInstance用来屏蔽继承</span></div><div class="line"><span class="built_in">Object</span>.defineProperty(myObject, <span class="built_in">Symbol</span>.hasInstance, &#123;</div><div class="line">    value: <span class="function"><span class="keyword">function</span>(<span class="params">v</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> myObject();</div><div class="line"><span class="built_in">console</span>.log(obj <span class="keyword">instanceof</span> myObject);   <span class="comment">//false</span></div></pre></td></tr></table></figure></p>
+<p><code>obj</code>是<code>myObject</code>的实例，因为给<code>myObject</code>改写<code>Symbol.hasInstance</code>，为其定义一个总是返回<code>false</code>的新函数。</p>
+<h4 id="Symbol-isConcatSpreadable"><a href="#Symbol-isConcatSpreadable" class="headerlink" title="Symbol.isConcatSpreadable"></a>Symbol.isConcatSpreadable</h4><p><code>Symbol.isConcatSpreadable</code>属性是一个布尔值，如果该属性值为<code>true</code>，则表示对象有<code>length</code>属性和数字键，它的数值型属性值应该被独立添加到<code>concat()</code>调用结果中。它与其他well-known Symbol不同的是，这个<code>Symbol</code>属性默认情况下不会出现在标准对象中，它是一个可选属性，用于增强作用于特定对象类型的<code>concat()</code>方法的功能，有效简化其默认特性。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> collection = &#123;</div><div class="line">    <span class="number">0</span>: <span class="string">'hello'</span>,</div><div class="line">    <span class="number">1</span>: <span class="string">'world'</span>,</div><div class="line">    a: <span class="number">12</span>,</div><div class="line">    length: <span class="number">2</span>,</div><div class="line">    [<span class="built_in">Symbol</span>.isConcatSpreadable]: <span class="literal">true</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> messages = [<span class="string">'Hi'</span>].concat(collection);</div><div class="line"><span class="built_in">console</span>.log(messages.length);   <span class="comment">//3</span></div><div class="line"><span class="built_in">console</span>.log(messages);  <span class="comment">//[ 'Hi', 'hello', 'world' ]</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>也可以在派生数组子类中将<code>Symbol.isConcatSpreadable</code>设置为<code>false</code>，从而防止元素在调用<code>concat()</code>方法时被分解。</p>
+</blockquote>
+<h4 id="Symbol-match、Symbol-replace、Symbol-search、Symbol-split属性"><a href="#Symbol-match、Symbol-replace、Symbol-search、Symbol-split属性" class="headerlink" title="Symbol.match、Symbol.replace、Symbol.search、Symbol.split属性"></a>Symbol.match、Symbol.replace、Symbol.search、Symbol.split属性</h4><p>字符串方法<code>match</code>、<code>replace</code>、<code>search</code>、<code>split</code>可以接受正则表达式作为参数，在ES6之前，无法使用开发者自定义的对象来替代正则表达式进行字符串匹配。在ES6中，定义了与上述方法对应的<code>Symbol</code>，这4个<code>Symbol</code>属性表示对应字符串方法的第一个参数应该调用的正则表达式参数的方法，它们定义在<code>RegExp.prototype</code>中，是字符串方法应该使用的默认是想。</p>
+<ul>
+<li><code>Symbol.match</code>接受一个字符串类型的参数，如果匹配成功，返回匹配元素的数组，否则返回<code>null</code></li>
+<li><code>Symbol.replace</code>接受一个字符串类型的参数和一个替换用的字符串，最终返回一个字符串</li>
+<li><code>Symbol.search</code>接受一个字符串参数，如果匹配到内容，则返回数字类型的索引位置，否则返回-1</li>
+<li><code>Symbol.split</code>接受一个字符串参数，根据匹配内容将字符串分解，并返回一个包含分解后片段的数组</li>
+</ul>
+<p>如果在对象中定义这些属性，即使不使用正则表达式和以正则表达式为参的方法也可以在对象中实现模式匹配。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> hasLengthOf10 = &#123;</div><div class="line">    [<span class="built_in">Symbol</span>.match]: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> value.length === <span class="number">10</span>? [value.substring(<span class="number">0</span>,<span class="number">10</span>)]: <span class="literal">null</span></div><div class="line">    &#125;,</div><div class="line">    [<span class="built_in">Symbol</span>.replace]: <span class="function"><span class="keyword">function</span>(<span class="params">value, replacement</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> value.length === <span class="number">10</span>?  value: replacement + value.substring(<span class="number">10</span>)</div><div class="line">    &#125;,</div><div class="line">    [<span class="built_in">Symbol</span>.search]: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> value.length === <span class="number">10</span>? <span class="number">0</span>: <span class="number">-1</span></div><div class="line">    &#125;,</div><div class="line">    [<span class="built_in">Symbol</span>.split]: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> value.length === <span class="number">10</span>? [<span class="string">""</span>, <span class="string">""</span>]: [value]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> msg1 = <span class="string">'Hello world'</span>,</div><div class="line">    msg2 = <span class="string">'Hello John'</span>;</div><div class="line"></div><div class="line"><span class="keyword">let</span> match1 = msg1.match(hasLengthOf10),</div><div class="line">    match2 = msg2.match(hasLengthOf10),</div><div class="line">    replace1 = msg1.replace(hasLengthOf10, <span class="string">'hey'</span>),</div><div class="line">    replace2 = msg2.replace(hasLengthOf10, <span class="string">'hey'</span>),</div><div class="line">    search1 = msg1.search(hasLengthOf10),</div><div class="line">    search2 = msg2.search(hasLengthOf10),</div><div class="line">    split1 = msg1.split(hasLengthOf10),</div><div class="line">    split2 = msg2.split(hasLengthOf10);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(match1, match2);    <span class="comment">//null [ 'Hello John' ]</span></div><div class="line"><span class="built_in">console</span>.log(replace1, replace2);    <span class="comment">//'heyd' 'Hello John'</span></div><div class="line"><span class="built_in">console</span>.log(search1, search2);  <span class="comment">//-1 0</span></div><div class="line"><span class="built_in">console</span>.log(split1, split2);    <span class="comment">//[ 'Hello world' ] [ '', '' ]</span></div></pre></td></tr></table></figure></p>
+<p>尽管<code>hasLengthOf10</code>不是正则表达式，但给它添加了相应的<code>Symbol</code>属性，所以传递给字符串方法，可以正常运行。</p>
+<h4 id="Symbol-toPrimitive方法"><a href="#Symbol-toPrimitive方法" class="headerlink" title="Symbol.toPrimitive方法"></a>Symbol.toPrimitive方法</h4><p>再JavaScript引擎中，当执行特定操作时，会尝试将对象转换到相应的原始值。到底使用哪一个原始值以前是由内部操作决定的。在ES6中，通过<code>Symbol.toPrimitive</code>方法可以更改返回的原始值。</p>
+<p><code>Symbol.toPrimitive</code>方法被定义在每一个标准类型的原型上，并且规定了当对象被转换为原始值应当执行的操作。当执行原始值转换时，总是会调用<code>Symbol.toPrimitive</code>方法并传入一个值做为参数，这个值在规范中被称作类型提示（<code>hint</code>）。该值有3个选择：<code>&quot;number&quot;</code>、<code>&quot;string&quot;</code>、<code>&quot;default&quot;</code>，对应这些参数，<code>Symbol.toPrimitive</code>返回的分别是：数字、字符串、无类型偏好的值。</p>
+<p>当<code>Symbol.toPrimitive</code>方法参数传入的为<code>&quot;number&quot;</code>，大多数标准对象，有以下特性。</p>
+<ul>
+<li>调用<code>valueOf</code>方法，如果结果是原始值，则返回</li>
+<li>否则，调用<code>toString</code>方法，如果结果是原始值，则返回</li>
+<li>如果无再可选值，则抛出错误</li>
+</ul>
+<p>当<code>Symbol.toPrimitive</code>方法参数传入的为<code>&quot;string&quot;</code>，大多数标准对象，有以下特性。</p>
+<ul>
+<li>调用<code>toString</code>方法，如果结果是原始值，则返回</li>
+<li>否则，调用<code>valueOf</code>方法，如果结果是原始值，则返回</li>
+<li>如果无再可选值，则抛出错误</li>
+</ul>
+<p>大多数情况下，标准对象会将默认模式按数字（<code>&quot;number&quot;</code>）模式处理（<code>Date</code>对象，默认模式是字符模式）。可以自定义<code>Symbol.toPrimitive</code>方法，覆盖这些默认的强制转换特性。</p>
+<blockquote>
+<p>默认模式只用于<code>==</code>、<code>+</code>运算以及<code>Date</code>构造函数传递一个参数时。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Temperature</span>(<span class="params">degrees</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.degrees = degrees</div><div class="line">&#125;</div><div class="line">Temperature.prototype[<span class="built_in">Symbol</span>.toPrimitive] = <span class="function"><span class="keyword">function</span>(<span class="params">hint</span>)</span>&#123;</div><div class="line">    <span class="keyword">switch</span>(hint)&#123;</div><div class="line">        <span class="keyword">case</span> <span class="string">'string'</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.degrees + <span class="string">'\u00b0'</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">'number'</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.degrees;</div><div class="line">        <span class="keyword">case</span> <span class="string">'default'</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.degrees + <span class="string">' degress'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> freezing = <span class="keyword">new</span> Temperature(<span class="number">32</span>);</div><div class="line"><span class="built_in">console</span>.log(freezing + <span class="string">'!'</span>);    <span class="comment">//32 degress!</span></div><div class="line"><span class="built_in">console</span>.log(freezing / <span class="number">2</span>);  <span class="comment">//16</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(freezing));  <span class="comment">//32°</span></div></pre></td></tr></table></figure>
+<p>这里在构造函数<code>Temperature.prototype</code>上定义了<code>Symbol.toPrimitive</code>屏蔽了继承的<code>Symbol.toPrimitive</code>方法。新的方法根据<code>hint</code>指定的模式返回不同的值（<code>hint</code>有JavaScript引擎传入）。</p>
+<h4 id="Symbol-toStringTag"><a href="#Symbol-toStringTag" class="headerlink" title="Symbol.toStringTag"></a>Symbol.toStringTag</h4><p>ES6中，通过<code>Symbol.toStringTag</code>改变调用<code>Object.prototype.toString</code>时返回的身份标识。这个<code>Symbol</code>所代表的属性在每一个对象中都存在，其定义了调用对象的<code>Object.prototype.toString.call()</code>方法时返回的值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person.prototype[<span class="built_in">Symbol</span>.toStringTag] = <span class="string">'Person'</span>;</div><div class="line"><span class="keyword">var</span> me = <span class="keyword">new</span> Person(<span class="string">'Nicholas'</span>);</div><div class="line"><span class="built_in">console</span>.log(me.toString()); <span class="comment">//'[object Person]'</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(me));    <span class="comment">//'[object Person]'</span></div></pre></td></tr></table></figure></p>
+<p><code>Person.prototype</code>继承了<code>Object.prototype.toString()</code>方法，所以调用<code>me.toString()</code>方法时也使用了<code>Symbol.toStringTag</code>的返回值。</p>
+<h4 id="Symbol-unscopables"><a href="#Symbol-unscopables" class="headerlink" title="Symbol.unscopables"></a>Symbol.unscopables</h4><p><code>with</code>语句设计的初衷是免于编写重复代码，但由此会带来，代码可读性变差，执行性能差且容易导致程序出错。最终标准规定，严格模式下，不可以使用<code>with</code>语句。且这条限制同样影响到了类和模块，默认使用严格模式且没有任何退出的方法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> values = [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],</div><div class="line">    colors = [<span class="string">'red'</span>, <span class="string">'green'</span>, <span class="string">'blue'</span>],</div><div class="line">    color = <span class="string">'black'</span>;</div><div class="line"></div><div class="line"><span class="keyword">with</span>(colors)&#123;</div><div class="line">    push(color);</div><div class="line">    push(...values)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在ES6环境中，<code>with</code>语句引用的<code>values</code>不是<code>with</code>语句外的变量<code>values</code>，而是数组本身的<code>values</code>方法，这样就脱离了代码原本的目标。（测试还是使用<code>with</code>语句外的变量，Node v10.0.0）。</p>
+<p>ES6增加<code>Symbol.unscopables</code>，这个<code>Symbol</code>通常用于<code>Array.prototype</code>，已在<code>with</code>语句中标示出不创建绑定的属性名。<code>Symbol.unscopables</code>是以对象的形式出现，它的键是在<code>with</code>语句中要忽略的标识符，对应的值必须为<code>true</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Array</span>.prototype[<span class="built_in">Symbol</span>.unscopables] = <span class="built_in">Object</span>.assign(<span class="built_in">Object</span>.create(<span class="literal">null</span>), &#123;</div><div class="line">    copyWithin: <span class="literal">true</span>,</div><div class="line">    entries: <span class="literal">true</span>,</div><div class="line">    fill: <span class="literal">true</span>,</div><div class="line">    find: <span class="literal">true</span>,</div><div class="line">    findIndex: <span class="literal">true</span>,</div><div class="line">    keys: <span class="literal">true</span>,</div><div class="line">    values: <span class="literal">true</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>这里在<code>Array.prototype</code>的<code>Symbol.unscopables</code>定义了ES6新的数组方法，这样在<code>with</code>语句中不再创建这些方法的绑定。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/《深入理解ES6》之解构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -312,7 +531,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T06:59:01-07:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T06:59:01+08:00">
                 2018-05-06
               </time>
             
@@ -519,7 +738,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T01:39:07-07:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T01:39:07+08:00">
                 2018-04-05
               </time>
             
@@ -758,7 +977,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T03:02:40-07:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T03:02:40+08:00">
                 2018-04-01
               </time>
             
@@ -953,7 +1172,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T04:21:02-08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T04:21:02+08:00">
                 2018-02-25
               </time>
             
@@ -1170,7 +1389,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T00:46:42-08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T00:46:42+08:00">
                 2018-01-28
               </time>
             
@@ -1250,7 +1469,7 @@
 <h4 id="在ES5中模拟默认参数"><a href="#在ES5中模拟默认参数" class="headerlink" title="在ES5中模拟默认参数"></a>在ES5中模拟默认参数</h4><p>ES5和早期版本中，可能通过如下方法模拟默认参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeRequest</span>(<span class="params">url, timeout, callback</span>)</span>&#123;</div><div class="line">    timeout = (<span class="keyword">typeof</span> timeout !== <span class="string">'undefined'</span>)? timeout: <span class="number">2000</span>;</div><div class="line">    callback = (<span class="keyword">typeof</span> callback !== <span class="string">'undefined'</span>)? callback: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="comment">//函数其余部分</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>示例中，<code>timeout</code>和<code>callback</code>为可选参数，如果没有传入相应的参数，会有一个默认值。对于函数命名参数，如果不显示传值，默认为<code>undefined</code>。在模拟默认参数时，最好不要这样写<code>timeout = timeout || 2000</code>，因为，如果想给<code>timeout</code>传入0，即使这个值合法，也会被视为<code>false</code>，最终<code>timeout</code>赋值为2000。</p>
 <h4 id="ES6中的默认参数"><a href="#ES6中的默认参数" class="headerlink" title="ES6中的默认参数"></a>ES6中的默认参数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeRequest</span>(<span class="params">url, timeout=<span class="number">2000</span>, callback=function(</span>) </span>&#123;&#125;)&#123;</div><div class="line">    <span class="comment">//函数其余部分</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>ES6简化了为形参提供默认参数的过程，声明函数时，可以为任意参数指定默认值，在已指定默认值的参数后面，可以继续声明无默认值参数。只有不为参数传入值或者 <strong>传入值为<code>undefined</code></strong> 时，对应参数才会使用默认值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//不使用timeout默认值</span></div><div class="line">makeRequest(<span class="string">'/foo'</span>,<span class="literal">undefined</span>,<span class="function"><span class="keyword">function</span>(<span class="params">body</span>)</span>&#123;</div><div class="line">    doSomething(body)</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">//使用timeout默认值</span></div><div class="line">makeRequest(<span class="string">'/foo'</span>)</div><div class="line"></div><div class="line"><span class="comment">//使用timeout默认值</span></div><div class="line">makeRequest(<span class="string">'/foo'</span>, <span class="literal">null</span>, <span class="function"><span class="keyword">function</span>(<span class="params">body</span>)</span>&#123;</div><div class="line">    doSomething(body)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>ES6简化了为形参提供默认参数的过程，声明函数时，可以为任意参数指定默认值，在已指定默认值的参数后面，可以继续声明无默认值参数。只有不为参数传入值或者 <strong>传入值为<code>undefined</code></strong> 时，对应参数才会使用默认值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用timeout默认值</span></div><div class="line">makeRequest(<span class="string">'/foo'</span>,<span class="literal">undefined</span>,<span class="function"><span class="keyword">function</span>(<span class="params">body</span>)</span>&#123;</div><div class="line">    doSomething(body)</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">//使用timeout默认值</span></div><div class="line">makeRequest(<span class="string">'/foo'</span>)</div><div class="line"></div><div class="line"><span class="comment">//不使用timeout默认值</span></div><div class="line">makeRequest(<span class="string">'/foo'</span>, <span class="literal">null</span>, <span class="function"><span class="keyword">function</span>(<span class="params">body</span>)</span>&#123;</div><div class="line">    doSomething(body)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
 <h4 id="默认参数值对arguments对象的影响"><a href="#默认参数值对arguments对象的影响" class="headerlink" title="默认参数值对arguments对象的影响"></a>默认参数值对arguments对象的影响</h4><p>在ES5非严格模式中，命名参数的变化会同步更新到<code>arguments</code>对象，严格模式中<code>arguments</code>对象不随命名参数变化而变化。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixArgs</span>(<span class="params">first, second</span>)</span>&#123;</div><div class="line">    <span class="comment">// 'use strict'</span></div><div class="line">    <span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);  <span class="comment">//true</span></div><div class="line">    <span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]); <span class="comment">//true</span></div><div class="line">    first = <span class="string">'c'</span>;</div><div class="line">    second = <span class="string">'d'</span>;</div><div class="line">    <span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">//true</span></div><div class="line">    <span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]); <span class="comment">//true</span></div><div class="line">&#125;</div><div class="line">mixArgs(<span class="string">'a'</span>, <span class="string">'b'</span>)；</div></pre></td></tr></table></figure></p>
 <p>当定义为严格模式时，输出为<code>true</code>，<code>true</code>，<code>false</code>，<code>false</code></p>
 <p>ES6中，函数使用了默认参数，无论是否显式定义了严格模式，<code>arguments</code>对象行为都与ES5中的严格模式保持一致。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixArgs</span>(<span class="params">first, second=<span class="string">'b'</span></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);  </div><div class="line">    <span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]);</div><div class="line">    first = <span class="string">'c'</span>;</div><div class="line">    second = <span class="string">'d'</span>;</div><div class="line">    <span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);</div><div class="line">    <span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]);</div><div class="line">&#125;</div><div class="line">mixArgs(<span class="string">'a'</span>)</div></pre></td></tr></table></figure></p>
@@ -1412,7 +1631,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-13T02:47:35-08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-13T02:47:35+08:00">
                 2018-01-13
               </time>
             
@@ -1654,7 +1873,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-16T18:16:01-08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-16T18:16:01+08:00">
                 2017-12-16
               </time>
             
@@ -1835,7 +2054,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-03T05:00:47-08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-03T05:00:47+08:00">
                 2017-12-03
               </time>
             
@@ -1996,7 +2215,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T02:44:34-08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T03:44:34+08:00">
                 2017-11-05
               </time>
             
@@ -2247,7 +2466,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2269,7 +2488,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
