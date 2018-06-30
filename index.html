@@ -300,7 +300,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/30/Set-and-Map/" itemprop="url">Set和Map</a></h2>
+                <a class="post-title-link" href="/2018/06/30/Set-and-Map/" itemprop="url">Set集合和Map集合</a></h2>
         
 
         <div class="post-meta">
@@ -385,7 +385,7 @@
       
         
           
-            <h2 id="Set集合和Map集合"><a href="#Set集合和Map集合" class="headerlink" title="Set集合和Map集合"></a>Set集合和Map集合</h2><p>Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。</p>
+            <p>Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。</p>
 <h3 id="Set集合"><a href="#Set集合" class="headerlink" title="Set集合"></a>Set集合</h3><h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><p>调用<code>new Set()</code>创建<code>Set</code>集合，调用<code>add</code>方法向集合中添加元素，访问<code>size</code>属性可以获取集合中目前的元素数量。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>(),</div><div class="line">    key1 = &#123;&#125;,</div><div class="line">    key2 = &#123;&#125;;</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line">set.add(<span class="string">'5'</span>);</div><div class="line">set.add(key1);</div><div class="line">set.add(key2);</div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//4</span></div></pre></td></tr></table></figure></p>
 <p>在<code>Set</code>集合中，不会对所存值进行强制的类型转换，数字5和字符串”5”是作为两个独立元素存在。由于<code>key1</code>和<code>key2</code>不会转换成字符串，因而它们再<code>Set</code>集合中是两个独立的元素。</p>
 <p>如果多次调用<code>add</code>方法，并传入相同的值作为参数，那么后续的调用实际上会被忽略。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line">set.add(<span class="string">'5'</span>);</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//2</span></div></pre></td></tr></table></figure></p>
