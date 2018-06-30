@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="https://lib.baomitu.com/pace/1.0.2/pace.min.js"></script>
+  <link href="https://lib.baomitu.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://lib.baomitu.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Set和Map," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Set集合和Map集合Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。 Set集合创建调用new Set()创建Set集合，调用add方法向集合中添加元素，访问size属性可以获取集合中目前的元素数量。12345678let set = new Set(),    key1 = &amp;#123;&amp;#125;,    key2 = &amp;#123">
+<meta name="keywords" content="Set和Map">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Set和Map">
+<meta property="og:url" content="http://yoursite.com/2018/06/30/Set-and-Map/index.html">
+<meta property="og:site_name" content="CoalYa&#39;s Notes">
+<meta property="og:description" content="Set集合和Map集合Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。 Set集合创建调用new Set()创建Set集合，调用add方法向集合中添加元素，访问size属性可以获取集合中目前的元素数量。12345678let set = new Set(),    key1 = &amp;#123;&amp;#125;,    key2 = &amp;#123">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-30T14:48:54.244Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Set和Map">
+<meta name="twitter:description" content="Set集合和Map集合Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。 Set集合创建调用new Set()创建Set集合，调用add方法向集合中添加元素，访问size属性可以获取集合中目前的元素数量。12345678let set = new Set(),    key1 = &amp;#123;&amp;#125;,    key2 = &amp;#123">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/30/Set-and-Map/"/>
+
+
+
+
+
+  <title>Set和Map | CoalYa's Notes</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110561175-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CoalYa's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">有态度很难，就做点记录吧。。。</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/30/Set-and-Map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CoalYa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CoalYa's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Set和Map</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-30T22:46:22+08:00">
+                2018-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/《深入理解ES6》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解ES6》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Set集合和Map集合"><a href="#Set集合和Map集合" class="headerlink" title="Set集合和Map集合"></a>Set集合和Map集合</h2><p>Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。</p>
+<h3 id="Set集合"><a href="#Set集合" class="headerlink" title="Set集合"></a>Set集合</h3><h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><p>调用<code>new Set()</code>创建<code>Set</code>集合，调用<code>add</code>方法向集合中添加元素，访问<code>size</code>属性可以获取集合中目前的元素数量。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>(),</div><div class="line">    key1 = &#123;&#125;,</div><div class="line">    key2 = &#123;&#125;;</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line">set.add(<span class="string">'5'</span>);</div><div class="line">set.add(key1);</div><div class="line">set.add(key2);</div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//4</span></div></pre></td></tr></table></figure></p>
+<p>在<code>Set</code>集合中，不会对所存值进行强制的类型转换，数字5和字符串”5”是作为两个独立元素存在。由于<code>key1</code>和<code>key2</code>不会转换成字符串，因而它们再<code>Set</code>集合中是两个独立的元素。</p>
+<p>如果多次调用<code>add</code>方法，并传入相同的值作为参数，那么后续的调用实际上会被忽略。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line">set.add(<span class="string">'5'</span>);</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//2</span></div></pre></td></tr></table></figure></p>
+<p>可以用数组来初始化<code>Set</code>集合，<code>Set</code>构造函数会过滤掉重复的值以保证集合中的元素各自唯一。可以通过<code>has</code>方法检测<code>Set</code>集合中是否存在某个值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">7</span>]);</div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//6</span></div><div class="line"><span class="built_in">console</span>.log(set.has(<span class="number">5</span>));    <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(set.has(<span class="number">9</span>));    <span class="comment">//false</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>Set</code>构造函数可以接受所有可迭代对象作为参数，构造函数通过迭代器从参数中取值。</p>
+</blockquote>
+<h4 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h4><p>调用<code>delete()</code>方法可以移除<code>Set</code>集合中的某一个元素，调用<code>clear()</code>方法会移除集合中所有元素。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line">set.add(<span class="string">'5'</span>);</div><div class="line"><span class="built_in">console</span>.log(set.has(<span class="number">5</span>));    <span class="comment">//true</span></div><div class="line">set.delete(<span class="number">5</span>);</div><div class="line"><span class="built_in">console</span>.log(set.has(<span class="number">5</span>));    <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//1</span></div><div class="line"></div><div class="line">set.clear();</div><div class="line"><span class="built_in">console</span>.log(set.has(<span class="string">'5'</span>));  <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//0</span></div></pre></td></tr></table></figure></p>
+<h4 id="Set集合的forEach方法"><a href="#Set集合的forEach方法" class="headerlink" title="Set集合的forEach方法"></a>Set集合的forEach方法</h4><p><code>forEach</code>方法的回调函数接受3个参数</p>
+<ul>
+<li><code>Set</code>集合中元素的值</li>
+<li>与第一个参数一样的值</li>
+<li>被遍历<code>Set</code>集合本身</li>
+</ul>
+<blockquote>
+<p><code>Set</code>集合没有键名，第一二个参数相等，保证其他<code>forEach</code>方法的一致性。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">4</span>,<span class="number">7</span>]);</div><div class="line">set.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, key, ownerSet</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(value,key);</div><div class="line">    <span class="built_in">console</span>.log(set === ownerSet);</div><div class="line">&#125;)</div><div class="line"><span class="comment">//4 4 true 7 7 true</span></div></pre></td></tr></table></figure>
+<p><code>Set</code>集合中的<code>forEach</code>方法中，第二个参数也与数组的一样，传递到回调函数中来指代<code>this</code>值。</p>
+<h4 id="将Set集合转换为数组"><a href="#将Set集合转换为数组" class="headerlink" title="将Set集合转换为数组"></a>将<code>Set</code>集合转换为数组</h4><p>使用展开运算符（<code>...</code>）可以将<code>Set</code>集合（可迭代对象）转换为数组<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">5</span>]),</div><div class="line">    arr = [...set];</div><div class="line"><span class="built_in">console</span>.log(arr);   <span class="comment">//[ 1, 2, 4, 3, 5, 7 ]</span></div></pre></td></tr></table></figure></p>
+<h4 id="Weak-Set集合"><a href="#Weak-Set集合" class="headerlink" title="Weak Set集合"></a>Weak Set集合</h4><p>将对象存储在<code>Set</code>的实例与存储在变量中完全一样，只要<code>Set</code>实例中的引用存在，垃圾回收机制就不能释放该对象的内存空间。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>(),</div><div class="line">    key = &#123;&#125;;</div><div class="line"></div><div class="line">set.add(key);</div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//1</span></div><div class="line"></div><div class="line"><span class="comment">//移除原始引用</span></div><div class="line">key = <span class="literal">null</span>;</div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//1</span></div><div class="line"></div><div class="line"><span class="comment">//重新取回原始引用</span></div><div class="line">key = [...set][<span class="number">0</span>]</div></pre></td></tr></table></figure></p>
+<p>示例中将变量<code>key</code>设置为<code>null</code>，清除了对初始对象的引用，但<code>Set</code>集合却保留了这个引用。有时候可能需要当其他所有引用不再存在时，<code>Set</code>集合中的这些引用随之消失。</p>
+<p>ES6引入了另外一个类型，Weak Set集合（弱引用<code>Set</code>集合）。Weak Set集合只会存储对象的弱引用，不可以存储原始值，集合中弱引用是对象的唯一的引用，则会被回收并释放相应内存。</p>
+<ul>
+<li>创建<br>用<code>WeakSet</code>构造函数可以创建Weak Set集合，也向构造函数可以传入一个可迭代对象来创建Weak Set集合。集合支持3个方法<code>add</code>、<code>has</code>和<code>delete</code>。<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">WeakSet</span>(),</div><div class="line">    key = &#123;&#125;;</div><div class="line"></div><div class="line">set.add(key);</div><div class="line"><span class="built_in">console</span>.log(set.has(key));</div><div class="line"></div><div class="line"><span class="comment">//移除对象key的最后一个强引用，Weak Set中的引用也自动移除</span></div><div class="line">key = <span class="literal">null</span>;</div><div class="line"></div><div class="line"><span class="keyword">let</span> key1 = &#123;&#125;,</div><div class="line">    key2 = &#123;&#125;,</div><div class="line">    set1 = <span class="keyword">new</span> <span class="built_in">WeakSet</span>([key1, key2]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>WeakSet</code>构造函数中，不接受任何原始值，否则会抛出错误。</p>
+<h4 id="两种Set类型的主要区别"><a href="#两种Set类型的主要区别" class="headerlink" title="两种Set类型的主要区别"></a>两种<code>Set</code>类型的主要区别</h4><ul>
+<li>在<code>WeakSet</code>实例中，如果向<code>add</code>、<code>has</code>和<code>delete</code>这3个方法中传入非对象参数都会导致程序报错。</li>
+<li><code>Weak Set</code>集合不可迭代，所以不能用于<code>for-of</code>循环。</li>
+<li><code>Weak Set</code>不暴露任何迭代器（例如<code>keys</code>和<code>values</code>方法）所以无法通过程序本身来检测其中内容。</li>
+<li><code>Weak Set</code>不支持<code>forEach</code>方法，不支持<code>size</code>属性。</li>
+</ul>
+<h3 id="Map集合"><a href="#Map集合" class="headerlink" title="Map集合"></a>Map集合</h3><p><code>Map</code>类型是一种储存着键值对的有序列表，其中键名和对应的值支持所有数据类型。键名不会被强制转换成其他形式，其的等价判断通过<code>Object.is</code>方法实现。</p>
+<h4 id="创建-1"><a href="#创建-1" class="headerlink" title="创建"></a>创建</h4><p>调用<code>new Map()</code>创建<code>Map</code>集合，调用<code>set</code>方法并传入键名和对应值作为两个参数。调用<code>get</code>方法传入键名可以获取对应的值，如果传入的键名不存在则会返回<code>undefined</code>。也可以向<code>Map</code>构造函数传入数组来创建一个<code>Map</code>集合，数组中每一个元素都是一个子数组，子数组中包含一个键值对的键名与值两个元素。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> map1 = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line"><span class="keyword">let</span> key = &#123;&#125;;</div><div class="line">map1.set(<span class="string">'title'</span>, <span class="string">'Understanding'</span>);</div><div class="line">map1.set(<span class="string">'year'</span>, <span class="number">2000</span>);</div><div class="line">map1.set(key, <span class="string">'lala'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(map1.get(<span class="string">'title'</span>));  <span class="comment">//'Understanding'</span></div><div class="line"><span class="built_in">console</span>.log(map1.get(<span class="string">'year'</span>));   <span class="comment">//2000</span></div><div class="line"><span class="built_in">console</span>.log(map1.get(key));  <span class="comment">//'lala'</span></div><div class="line"><span class="built_in">console</span>.log(map1.get(<span class="string">'name'</span>));   <span class="comment">//undefined</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> map2 = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">'name'</span>, <span class="string">'Nicholas'</span>], [<span class="string">'age'</span>, <span class="number">25</span>]]);</div><div class="line"><span class="built_in">console</span>.log(map2.get(<span class="string">'name'</span>));  <span class="comment">//'Nicholas'</span></div><div class="line"><span class="built_in">console</span>.log(map2.get(<span class="string">'age'</span>));   <span class="comment">//25</span></div></pre></td></tr></table></figure></p>
+<h4 id="Map集合支持的方法"><a href="#Map集合支持的方法" class="headerlink" title="Map集合支持的方法"></a>Map集合支持的方法</h4><p><code>Map</code>和<code>Set</code>集合有3个通用的方法</p>
+<ul>
+<li><code>has</code>检测指定键名在<code>Map</code>集合中是否存在</li>
+<li><code>delete</code>从<code>Map</code>集合中删除指定键名及其对应的值</li>
+<li><code>clear</code>移除<code>Map</code>集合中的所有键值对</li>
+</ul>
+<p><code>Map</code>集合也支持<code>size</code>属性，代表当前集合中包含的键值对数量。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line">map.set(<span class="string">'name'</span>, <span class="string">'Nicholas'</span>);</div><div class="line">map.set(<span class="string">'age'</span>, <span class="number">25</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(map.size);  <span class="comment">//2</span></div><div class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'name'</span>));   <span class="comment">//true</span></div><div class="line"></div><div class="line">map.delete(<span class="string">'name'</span>);</div><div class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'name'</span>));   <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(map.size);  <span class="comment">//1</span></div><div class="line"></div><div class="line">map.clear();</div><div class="line"><span class="built_in">console</span>.log(map.size);  <span class="comment">//0</span></div><div class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'age'</span>));    <span class="comment">//false</span></div></pre></td></tr></table></figure></p>
+<h4 id="Map集合的forEach方法"><a href="#Map集合的forEach方法" class="headerlink" title="Map集合的forEach方法"></a>Map集合的forEach方法</h4><p><code>Map</code>集合中<code>forEach</code>方法和<code>Set</code>集合的<code>forEach</code>方法类似，其回调函数接受3个参数</p>
+<ul>
+<li><code>Map</code>集合中元素的值</li>
+<li>值对应的键名</li>
+<li><code>Map</code>集合本身</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">'name'</span>, <span class="string">'Nicholas'</span>], [<span class="string">'age'</span>, <span class="number">20</span>]]);</div><div class="line">map.forEach(<span class="function">(<span class="params">value, key, ownerMap</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span> <span class="subst">$&#123;value&#125;</span>`</span>);</div><div class="line">    <span class="built_in">console</span>.log(ownerMap === map);</div><div class="line">&#125;)</div><div class="line"><span class="comment">//'name' 'Nicholas'</span></div><div class="line"><span class="comment">//true</span></div><div class="line"><span class="comment">//'age' 20</span></div><div class="line"><span class="comment">//true</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>也可以指定<code>forEach</code>函数的第二个参数作为回调的<code>this</code>值</p>
+</blockquote>
+<h4 id="Weak-Map集合"><a href="#Weak-Map集合" class="headerlink" title="Weak Map集合"></a>Weak Map集合</h4><p><code>Weak Map</code>类型是一种存储键值对的无序列表，键名必须是非<code>null</code>类型对象，键名对应的值可以是任意类型。</p>
+<p>和<code>Weak Set</code>集合类似，<code>Weak Map</code>是弱引用<code>Map</code>集合，用于存储对象的弱引用，集合中保存的是对象的弱引用，如果弱引用之外不存在其他的强引用，引擎垃圾回收机制会自动回收这个对象，同时也会移除<code>Weak Map</code>集合中的键值对。但只有集合中的键名遵从这个规则，键名对应的值如果是一个对象，则保存的是对象的强引用，不会触发垃圾回收机制。</p>
+<ul>
+<li><p>初始化<br>调用<code>WeakMap</code>构造函数创建一个<code>Weak Map</code>，通过<code>set</code>方法添加数据，通过<code>get</code>方法获取数据。也可以通过传入一个数组，数组内的元素为一个数组，该数组有两个元素构成，第一个是键名，传入的值必须是非<code>null</code>对象，第二个是键名对应的值，可以是任意值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> map1 = <span class="keyword">new</span> <span class="built_in">WeakMap</span>(),</div><div class="line">    ele = <span class="built_in">document</span>.querySelector(<span class="string">'.ele'</span>);</div><div class="line"></div><div class="line">map1.set(ele, <span class="string">'original'</span>);</div><div class="line"><span class="keyword">let</span> value = map.get(ele);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(value); <span class="comment">//'original'</span></div><div class="line"></div><div class="line"><span class="comment">//移除ele元素</span></div><div class="line">ele.parentNode.removeChild(ele);</div><div class="line">ele = <span class="literal">null</span>; </div><div class="line"><span class="comment">// Weak Map 集合为空</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> key1 = &#123;&#125;,</div><div class="line">    key2 = &#123;&#125;,</div><div class="line">    map2 = <span class="keyword">new</span> <span class="built_in">WeakMap</span>([[key1, <span class="string">'hello'</span>], [key2, <span class="string">'world'</span>]]);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(map2.has(key1));    <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(map2.get(key1));    <span class="comment">//'hello'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>支持的方法<br><code>Weak Map</code>集合只支持两个可以操作键值对的方法：<code>has</code>和<code>delete</code>方法，<code>has</code>方法用于检测给定键在集合中是否存在，<code>delete</code>方法可以移除指定的键值对。和<code>Weak Set</code>一样，二者都不支持键名枚举，也不支持<code>clear</code>方法。</p>
+</li>
+<li><p>私有对象数据<br><code>Weak Map</code>集合一般用于储存DOM元素，还有一个实际的应用是存储对象实例的私有数据</p>
+</li>
+</ul>
+<p>在ES5中，可以通过下面这种模式创建一个接近真正私有数据的对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Person = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> privateData = &#123;&#125;,</div><div class="line">        privateId = <span class="number">0</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">        <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, <span class="string">'_id'</span>, &#123;</div><div class="line">            value: privateId++</div><div class="line">        &#125;)</div><div class="line">        privateData[<span class="keyword">this</span>._id] = &#123;</div><div class="line">            name: name</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    Person.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> privateData[<span class="keyword">this</span>._id].name</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> Person</div><div class="line">&#125;())</div></pre></td></tr></table></figure></p>
+<p><code>Person</code>又一个立即调用函数表达式生成，包括两个私有变量：<code>privateData</code>和<code>privateId</code>，<code>privateData</code>对象保存的是每个实例的私有信息，<code>privateId</code>则为每个实例生成一个独立的ID。当调用<code>Person</code>构造函数时，属性<code>_id</code>的值会加1，这个属性不可枚举，不可写，不可配置。</p>
+<p><code>privateData</code>对象保存了所有实例对应的名称，调用<code>getName</code>函数，即可通过<code>this._id</code>获取当前示例的ID，并以此从<code>privateData</code>对象提取实例名称。</p>
+<p>这种方法最大的问题是，如果不主动管理，由于无法获知对象实例何时被销毁，因此<code>privateData</code>中的数据永远都不会消失。使用<code>Weak Map</code>集合就可以解决这个问题。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Person = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> privateData = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">        privateData.set(<span class="keyword">this</span>, &#123;<span class="attr">name</span>: name&#125;)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    Person.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> privateData.get(<span class="keyword">this</span>).name</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> Person</div><div class="line">&#125;())</div></pre></td></tr></table></figure>
+<p>由于<code>Person</code>对象实例可以直接作为集合的键使用，无需维护一套ID体系来跟踪数据。这样只要对象实例被销毁，相关信息也会被销毁，保证了信息的私有性。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Set和Map/" rel="tag"># Set和Map</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/20/Symbol/" rel="next" title="Symbol">
+                <i class="fa fa-chevron-left"></i> Symbol
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="CoalYa" />
+            
+              <p class="site-author-name" itemprop="name">CoalYa</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set集合和Map集合"><span class="nav-number">1.</span> <span class="nav-text">Set集合和Map集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Set集合"><span class="nav-number">1.1.</span> <span class="nav-text">Set集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建"><span class="nav-number">1.1.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#移除"><span class="nav-number">1.1.2.</span> <span class="nav-text">移除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set集合的forEach方法"><span class="nav-number">1.1.3.</span> <span class="nav-text">Set集合的forEach方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将Set集合转换为数组"><span class="nav-number">1.1.4.</span> <span class="nav-text">将Set集合转换为数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Weak-Set集合"><span class="nav-number">1.1.5.</span> <span class="nav-text">Weak Set集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两种Set类型的主要区别"><span class="nav-number">1.1.6.</span> <span class="nav-text">两种Set类型的主要区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map集合"><span class="nav-number">1.2.</span> <span class="nav-text">Map集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Map集合支持的方法"><span class="nav-number">1.2.2.</span> <span class="nav-text">Map集合支持的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Map集合的forEach方法"><span class="nav-number">1.2.3.</span> <span class="nav-text">Map集合的forEach方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Weak-Map集合"><span class="nav-number">1.2.4.</span> <span class="nav-text">Weak Map集合</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CoalYa</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/jquery/2.2.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/velocity/1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/velocity/1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://lib.baomitu.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
