@@ -1685,10 +1685,7 @@
       
         
           
-            <blockquote>
-<p>“一杯敬明天，一杯敬过往”、“一杯敬自由，一杯敬死亡”。逛了下歌手，《消愁》这首歌句句戳心。</p>
-</blockquote>
-<h3 id="函数形参的默认值"><a href="#函数形参的默认值" class="headerlink" title="函数形参的默认值"></a>函数形参的默认值</h3><p><code>JavaScript</code>函数语法规定，无论在函数定义中声明了多少形参，调用时可以传入任意数量的参数。可以在定义时，当已定义的形参无对应的传入参数时为其指定一个默认值。</p>
+            <h3 id="函数形参的默认值"><a href="#函数形参的默认值" class="headerlink" title="函数形参的默认值"></a>函数形参的默认值</h3><p><code>JavaScript</code>函数语法规定，无论在函数定义中声明了多少形参，调用时可以传入任意数量的参数。可以在定义时，当已定义的形参无对应的传入参数时为其指定一个默认值。</p>
 <h4 id="在ES5中模拟默认参数"><a href="#在ES5中模拟默认参数" class="headerlink" title="在ES5中模拟默认参数"></a>在ES5中模拟默认参数</h4><p>ES5和早期版本中，可能通过如下方法模拟默认参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeRequest</span>(<span class="params">url, timeout, callback</span>)</span>&#123;</div><div class="line">    timeout = (<span class="keyword">typeof</span> timeout !== <span class="string">'undefined'</span>)? timeout: <span class="number">2000</span>;</div><div class="line">    callback = (<span class="keyword">typeof</span> callback !== <span class="string">'undefined'</span>)? callback: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="comment">//函数其余部分</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>示例中，<code>timeout</code>和<code>callback</code>为可选参数，如果没有传入相应的参数，会有一个默认值。对于函数命名参数，如果不显示传值，默认为<code>undefined</code>。在模拟默认参数时，最好不要这样写<code>timeout = timeout || 2000</code>，因为，如果想给<code>timeout</code>传入0，即使这个值合法，也会被视为<code>false</code>，最终<code>timeout</code>赋值为2000。</p>
 <h4 id="ES6中的默认参数"><a href="#ES6中的默认参数" class="headerlink" title="ES6中的默认参数"></a>ES6中的默认参数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeRequest</span>(<span class="params">url, timeout=<span class="number">2000</span>, callback=function(</span>) </span>&#123;&#125;)&#123;</div><div class="line">    <span class="comment">//函数其余部分</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -1927,10 +1924,7 @@
       
         
           
-            <blockquote>
-<p>18年的第一篇，回头看了看去年写的总结以及目标，完成了一小半，今年要更加努力才行。17年总体来说差强人意，代码写的依旧烂，当然也没留下太多遗憾。加入了新的公司，结识了一些简简单单的人。昨晚老爸问，有女朋友了吗？为什么没有？哎呀，刀刀暴击，不给活路。顿时思绪万千，额……失眠了。或许还没有成为理想中的自己吧，又或许其他。有些人，想着想着就远了，有些梦，做着做着就醒了。定几个小目标吧，1. 写好代码。毕竟这是立身之本。2. 学英语。努力赚钱，出国看看，语言还是很重要的。3. 学吉他。几年没弹过了，不忘初心嘛。4. 健身。报个健身房，撕裂吧腹肌胸肌肱二头肌。5. 考个驾照？</p>
-</blockquote>
-<p>ES6之前，JavaScript字符串是基于16位字符编码(UTF-16)进行构建。每16位序列是一个编码单元，代表一个字符。<code>length</code>、<code>charAt()</code>等字符串属性和方法都是基于这种编码单元构造的。</p>
+            <p>ES6之前，JavaScript字符串是基于16位字符编码(UTF-16)进行构建。每16位序列是一个编码单元，代表一个字符。<code>length</code>、<code>charAt()</code>等字符串属性和方法都是基于这种编码单元构造的。</p>
 <h3 id="UTF-16码位"><a href="#UTF-16码位" class="headerlink" title="UTF-16码位"></a>UTF-16码位</h3><p>Unicode为每一个字符提供了唯一的标识符，又称为码位，它是从0开始的数值。而表示字符的这些数值或者码位，称之为字符编码。</p>
 <p>在UTF-16中，前2^16个码位均以16位的编码单元表示，这个范围称作<strong>基本多文种平面</strong>（BMP）。超出这个范围的码位则要归属于某个辅助平面，因为用16位已经无法表示。为此，UTF-16引入了<em>代理对</em>，规定用两个16位编码单元表示一个码位。</p>
 <p>所以，字符串有两种，一种是由一个编码单元16位表示的BMP字符，另一种是有两个编码单元32位表示的<strong>辅助平面字符</strong></p>
