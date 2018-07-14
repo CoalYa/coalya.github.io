@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。 Set集合创建调用new Set()创建Set集合，调用add方法向集合中添加元素，访问size属性可以获取集合中目前的元素数量。12345678let set = new Set(),    key1 = &amp;#123;&amp;#125;,    key2 = &amp;#123;&amp;#125;;set">
+<meta name="description" content="Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。">
 <meta name="keywords" content="Set和Map">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Set集合和Map集合">
 <meta property="og:url" content="http://yoursite.com/2018/06/30/Set-and-Map/index.html">
 <meta property="og:site_name" content="CoalYa&#39;s Notes">
-<meta property="og:description" content="Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。 Set集合创建调用new Set()创建Set集合，调用add方法向集合中添加元素，访问size属性可以获取集合中目前的元素数量。12345678let set = new Set(),    key1 = &amp;#123;&amp;#125;,    key2 = &amp;#123;&amp;#125;;set">
+<meta property="og:description" content="Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-30T14:53:07.829Z">
+<meta property="og:updated_time" content="2018-07-14T11:32:35.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Set集合和Map集合">
-<meta name="twitter:description" content="Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。 Set集合创建调用new Set()创建Set集合，调用add方法向集合中添加元素，访问size属性可以获取集合中目前的元素数量。12345678let set = new Set(),    key1 = &amp;#123;&amp;#125;,    key2 = &amp;#123;&amp;#125;;set">
+<meta name="twitter:description" content="Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。">
 
 
 
@@ -111,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     version: '5.1.3',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -385,7 +385,7 @@
       
 
       
-        <p>Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。</p>
+        <p>Set集合是一种无重复元素的列表。Map集合内含多组键值对，集合中每个元素分别存放着可访问的键名和它对应的值。<a id="more"></a></p>
 <h3 id="Set集合"><a href="#Set集合" class="headerlink" title="Set集合"></a>Set集合</h3><h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><p>调用<code>new Set()</code>创建<code>Set</code>集合，调用<code>add</code>方法向集合中添加元素，访问<code>size</code>属性可以获取集合中目前的元素数量。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>(),</div><div class="line">    key1 = &#123;&#125;,</div><div class="line">    key2 = &#123;&#125;;</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line">set.add(<span class="string">'5'</span>);</div><div class="line">set.add(key1);</div><div class="line">set.add(key2);</div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//4</span></div></pre></td></tr></table></figure></p>
 <p>在<code>Set</code>集合中，不会对所存值进行强制的类型转换，数字5和字符串”5”是作为两个独立元素存在。由于<code>key1</code>和<code>key2</code>不会转换成字符串，因而它们再<code>Set</code>集合中是两个独立的元素。</p>
 <p>如果多次调用<code>add</code>方法，并传入相同的值作为参数，那么后续的调用实际上会被忽略。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line">set.add(<span class="string">'5'</span>);</div><div class="line">set.add(<span class="number">5</span>);</div><div class="line"><span class="built_in">console</span>.log(set.size);  <span class="comment">//2</span></div></pre></td></tr></table></figure></p>
@@ -496,8 +496,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/09/Iterator-and-Generator/" rel="prev" title="迭代器（Iterator）和生成器（Generator）">
-                迭代器（Iterator）和生成器（Generator） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/09/Iterator-and-Generator1/" rel="prev" title="迭代器（Iterator）和生成器（Generator）之一">
+                迭代器（Iterator）和生成器（Generator）之一 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -767,13 +767,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>

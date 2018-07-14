@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="ContextReact.js中，某个组件往自己的context里面放了某些状态，这个组件之下的所有子组件都可以直接访问这个状态，而不需要通过中间组件的传递。一个组件的context只有子组件能够访问，它的父组件是不能访问的。 1234567891011121314151617181920212223242526272829class App extends Component &amp;#123;  s">
+<meta name="description" content="ContextReact.js中，某个组件往自己的context里面放了某些状态，这个组件之下的所有子组件都可以直接访问这个状态，而不需要通过中间组件的传递。一个组件的context只有子组件能够访问，它的父组件是不能访问的。">
 <meta name="keywords" content="Context">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Context">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/Context/index.html">
 <meta property="og:site_name" content="CoalYa&#39;s Notes">
-<meta property="og:description" content="ContextReact.js中，某个组件往自己的context里面放了某些状态，这个组件之下的所有子组件都可以直接访问这个状态，而不需要通过中间组件的传递。一个组件的context只有子组件能够访问，它的父组件是不能访问的。 1234567891011121314151617181920212223242526272829class App extends Component &amp;#123;  s">
+<meta property="og:description" content="ContextReact.js中，某个组件往自己的context里面放了某些状态，这个组件之下的所有子组件都可以直接访问这个状态，而不需要通过中间组件的传递。一个组件的context只有子组件能够访问，它的父组件是不能访问的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-03T13:13:34.411Z">
+<meta property="og:updated_time" content="2018-07-14T11:32:16.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Context">
-<meta name="twitter:description" content="ContextReact.js中，某个组件往自己的context里面放了某些状态，这个组件之下的所有子组件都可以直接访问这个状态，而不需要通过中间组件的传递。一个组件的context只有子组件能够访问，它的父组件是不能访问的。 1234567891011121314151617181920212223242526272829class App extends Component &amp;#123;  s">
+<meta name="twitter:description" content="ContextReact.js中，某个组件往自己的context里面放了某些状态，这个组件之下的所有子组件都可以直接访问这个状态，而不需要通过中间组件的传递。一个组件的context只有子组件能够访问，它的父组件是不能访问的。">
 
 
 
@@ -111,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     version: '5.1.3',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -374,7 +374,7 @@
       
 
       
-        <h3 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h3><p>React.js中，某个组件往自己的<code>context</code>里面放了某些状态，这个组件之下的所有子组件都可以直接访问这个状态，而不需要通过中间组件的传递。一个组件的<code>context</code>只有子组件能够访问，它的父组件是不能访问的。</p>
+        <h3 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h3><p>React.js中，某个组件往自己的<code>context</code>里面放了某些状态，这个组件之下的所有子组件都可以直接访问这个状态，而不需要通过中间组件的传递。一个组件的<code>context</code>只有子组件能够访问，它的父组件是不能访问的。<a id="more"></a></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> childContextTypes = &#123;</div><div class="line">    themeColor: PropTypes.string,</div><div class="line">    num: PropTypes.number</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">constructor</span>() &#123;</div><div class="line">    <span class="keyword">super</span>()</div><div class="line">    <span class="keyword">this</span>.state = &#123;</div><div class="line">      themeColor: <span class="string">'red'</span>,</div><div class="line">      num: <span class="string">'helloworld'</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  getChildContext() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      themeColor: <span class="keyword">this</span>.state.themeColor,</div><div class="line">      num: <span class="number">123</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div className=<span class="string">"App"</span>&gt;</div><div class="line">        &lt;Head /&gt;</div><div class="line">        &lt;Main /&gt;</div><div class="line">        &lt;Footer /&gt;</div><div class="line">      &lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">    )</span></div><div class="line"><span class="regexp">  &#125;</span></div><div class="line"><span class="regexp">&#125;</span></div></pre></td></tr></table></figure>
 <p><code>getChildContext</code>方法是用来设置<code>context</code>，返回的对象就是<code>context</code>，所有的子组件都是可以访问到这个对象。<code>childContextTypes</code>是用来验证<code>getChildContext</code>返回的对象<strong>必须要写</strong>。因为<code>context</code>是一个危险的特性，React.js团队想把危险的东西搞得复杂一点，提高使用门槛。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Footer</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> contextTypes = &#123;</div><div class="line">        <span class="comment">// num: PropTypes.number,</span></div><div class="line">        themeColor: PropTypes.string</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            &lt;div style=&#123;&#123;<span class="attr">color</span>: <span class="keyword">this</span>.context.themeColor&#125;&#125;&gt;这是底部了&lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">        )</span></div><div class="line"><span class="regexp">    &#125;</span></div><div class="line"><span class="regexp">&#125;</span></div></pre></td></tr></table></figure>
@@ -705,13 +705,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>

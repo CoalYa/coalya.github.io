@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="对象类别ES6规范清晰定义了每一个类别的对象  普通对象  具有JavaScript对象所有的默认行为 特异对象  具有某些与默认行为不符的内部行为 标准对象  ES6规范中定义的对象，例如Array、Date等。标准对象既可以是普通对象，也可以是特异对象。 内建对象  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。  对象字面量语法扩展属性初始值的简写当一个">
+<meta name="description" content="对象类别ES6规范清晰定义了每一个类别的对象  普通对象  具有JavaScript对象所有的默认行为 特异对象  具有某些与默认行为不符的内部行为 标准对象  ES6规范中定义的对象，例如Array、Date等。标准对象既可以是普通对象，也可以是特异对象。 内建对象  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。">
 <meta name="keywords" content="对象的扩展">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《深入理解ES6》之扩展对象的功能">
 <meta property="og:url" content="http://yoursite.com/2018/04/01/《深入理解ES6》之扩展对象的功能/index.html">
 <meta property="og:site_name" content="CoalYa&#39;s Notes">
-<meta property="og:description" content="对象类别ES6规范清晰定义了每一个类别的对象  普通对象  具有JavaScript对象所有的默认行为 特异对象  具有某些与默认行为不符的内部行为 标准对象  ES6规范中定义的对象，例如Array、Date等。标准对象既可以是普通对象，也可以是特异对象。 内建对象  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。  对象字面量语法扩展属性初始值的简写当一个">
+<meta property="og:description" content="对象类别ES6规范清晰定义了每一个类别的对象  普通对象  具有JavaScript对象所有的默认行为 特异对象  具有某些与默认行为不符的内部行为 标准对象  ES6规范中定义的对象，例如Array、Date等。标准对象既可以是普通对象，也可以是特异对象。 内建对象  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-01T10:03:52.580Z">
+<meta property="og:updated_time" content="2018-07-14T11:33:41.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《深入理解ES6》之扩展对象的功能">
-<meta name="twitter:description" content="对象类别ES6规范清晰定义了每一个类别的对象  普通对象  具有JavaScript对象所有的默认行为 特异对象  具有某些与默认行为不符的内部行为 标准对象  ES6规范中定义的对象，例如Array、Date等。标准对象既可以是普通对象，也可以是特异对象。 内建对象  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。  对象字面量语法扩展属性初始值的简写当一个">
+<meta name="twitter:description" content="对象类别ES6规范清晰定义了每一个类别的对象  普通对象  具有JavaScript对象所有的默认行为 特异对象  具有某些与默认行为不符的内部行为 标准对象  ES6规范中定义的对象，例如Array、Date等。标准对象既可以是普通对象，也可以是特异对象。 内建对象  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。">
 
 
 
@@ -111,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     version: '5.1.3',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -392,6 +392,7 @@
 <li><strong>标准对象</strong>  ES6规范中定义的对象，例如<code>Array</code>、<code>Date</code>等。标准对象既可以是普通对象，也可以是特异对象。</li>
 <li><strong>内建对象</strong>  脚本开始执行时存在于JavaScript执行环境中的对象，所有标准对象都是内建对象。</li>
 </ul>
+<a id="more"></a>
 <h3 id="对象字面量语法扩展"><a href="#对象字面量语法扩展" class="headerlink" title="对象字面量语法扩展"></a>对象字面量语法扩展</h3><h4 id="属性初始值的简写"><a href="#属性初始值的简写" class="headerlink" title="属性初始值的简写"></a>属性初始值的简写</h4><p>当一个对象的属性与本地变量名同名时，不必再写冒号和值，简单的写属性名即可。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//ES5</span></div><div class="line"><span class="comment">// function createPerson(name, age)&#123;</span></div><div class="line"><span class="comment">//     return &#123;</span></div><div class="line"><span class="comment">//         name: name,</span></div><div class="line"><span class="comment">//         age: age</span></div><div class="line"><span class="comment">//     &#125;</span></div><div class="line"><span class="comment">// &#125;</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name, age</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        name,</div><div class="line">        age</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>当对象字面量里只有一个属性的名称时，JavaScript引擎会在可访问作用域中查找同名变量。如果找到，则变量的值被赋给对象字面量里的同名属性。</p>
 <h4 id="对象方法的简写"><a href="#对象方法的简写" class="headerlink" title="对象方法的简写"></a>对象方法的简写</h4><p>之前的版本，如果为对象添加方法，必须通过指定名称并完整定义函数来实现。再ES6中，语法更加简洁，消除了冒号和关键字<code>function</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//ES5</span></div><div class="line"><span class="comment">// var person = &#123;</span></div><div class="line"><span class="comment">//     name: 'Nicholas',</span></div><div class="line"><span class="comment">//     sayName: function() &#123;</span></div><div class="line"><span class="comment">//         console.log(this.name);</span></div><div class="line"><span class="comment">//     &#125;</span></div><div class="line"><span class="comment">// &#125;</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    name: <span class="string">'Nicholas'</span>,</div><div class="line">    sayName() &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -739,13 +740,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>

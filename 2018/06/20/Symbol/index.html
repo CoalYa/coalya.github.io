@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="Symbol和Symbol属性Symbol是ES6引入的第6种原始类型数据。ES6之前，属性名都是字符串类型，Symbol可以为属性添加非字符串名称。 创建所有原始值，除了Symbol以外都有各自的字面量形式。通过全局的Symbol函数来创建一个Symbol，Symbol函数接受一个可选参数，用来描述即将创建的Symbol，这段描述不可用于属性访问。1234567let firstName = S">
+<meta name="description" content="Symbol和Symbol属性Symbol是ES6引入的第6种原始类型数据。ES6之前，属性名都是字符串类型，Symbol可以为属性添加非字符串名称。">
 <meta name="keywords" content="Symbol">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Symbol">
 <meta property="og:url" content="http://yoursite.com/2018/06/20/Symbol/index.html">
 <meta property="og:site_name" content="CoalYa&#39;s Notes">
-<meta property="og:description" content="Symbol和Symbol属性Symbol是ES6引入的第6种原始类型数据。ES6之前，属性名都是字符串类型，Symbol可以为属性添加非字符串名称。 创建所有原始值，除了Symbol以外都有各自的字面量形式。通过全局的Symbol函数来创建一个Symbol，Symbol函数接受一个可选参数，用来描述即将创建的Symbol，这段描述不可用于属性访问。1234567let firstName = S">
+<meta property="og:description" content="Symbol和Symbol属性Symbol是ES6引入的第6种原始类型数据。ES6之前，属性名都是字符串类型，Symbol可以为属性添加非字符串名称。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-19T23:22:56.620Z">
+<meta property="og:updated_time" content="2018-07-14T11:32:39.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Symbol">
-<meta name="twitter:description" content="Symbol和Symbol属性Symbol是ES6引入的第6种原始类型数据。ES6之前，属性名都是字符串类型，Symbol可以为属性添加非字符串名称。 创建所有原始值，除了Symbol以外都有各自的字面量形式。通过全局的Symbol函数来创建一个Symbol，Symbol函数接受一个可选参数，用来描述即将创建的Symbol，这段描述不可用于属性访问。1234567let firstName = S">
+<meta name="twitter:description" content="Symbol和Symbol属性Symbol是ES6引入的第6种原始类型数据。ES6之前，属性名都是字符串类型，Symbol可以为属性添加非字符串名称。">
 
 
 
@@ -111,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     version: '5.1.3',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -385,7 +385,7 @@
       
 
       
-        <h2 id="Symbol和Symbol属性"><a href="#Symbol和Symbol属性" class="headerlink" title="Symbol和Symbol属性"></a>Symbol和Symbol属性</h2><p><code>Symbol</code>是ES6引入的第6种原始类型数据。ES6之前，属性名都是字符串类型，<code>Symbol</code>可以为属性添加非字符串名称。</p>
+        <h2 id="Symbol和Symbol属性"><a href="#Symbol和Symbol属性" class="headerlink" title="Symbol和Symbol属性"></a>Symbol和Symbol属性</h2><p><code>Symbol</code>是ES6引入的第6种原始类型数据。ES6之前，属性名都是字符串类型，<code>Symbol</code>可以为属性添加非字符串名称。<a id="more"></a></p>
 <h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>所有原始值，除了<code>Symbol</code>以外都有各自的字面量形式。通过全局的<code>Symbol</code>函数来创建一个<code>Symbol</code>，<code>Symbol</code>函数接受一个可选参数，用来描述即将创建的<code>Symbol</code>，这段描述不可用于属性访问。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> firstName = <span class="built_in">Symbol</span>(<span class="string">'first name'</span>);</div><div class="line"><span class="keyword">let</span> person = &#123;&#125;;</div><div class="line">person[firstName] = <span class="string">'Nicholas'</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'first name'</span> <span class="keyword">in</span> person);    <span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(person[firstName]);     <span class="comment">//'Nicholas'</span></div><div class="line"><span class="built_in">console</span>.log(firstName);     <span class="comment">//'Symbol(first name)'</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> firstName); <span class="comment">//'symbol'</span></div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>不能通过<code>new</code>调用<code>Symbol</code>函数，这样会导致程序错误。<br>ES6扩展了<code>typeof</code>操作符，支持检测<code>Symbol</code>类型。<br><code>Symbol</code>的描述被存储在内部的<code>[[Description]]</code>属性中，只有调用<code>Symbol</code>的<code>toString</code>方法时才可以读取这个属性。执行<code>console.log</code>时，隐式调用了<code>firstName</code>的<code>toString</code>方法。</p>
@@ -763,13 +763,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
